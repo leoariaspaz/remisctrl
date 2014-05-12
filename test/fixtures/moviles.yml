@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  nromovil: 1
+  marca: MyString
+  modelo: 1
+  dominio: MyString
+  estado_id: 
+  fecha_estado: 2013-12-03
+  agencia_id: 
+  propietario_id: 
+  chofer_id: 
+
+two:
+  nromovil: 1
+  marca: MyString
+  modelo: 1
+  dominio: MyString
+  estado_id: 
+  fecha_estado: 2013-12-03
+  agencia_id: 
+  propietario_id: 
+  chofer_id: 

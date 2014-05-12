@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  motivo: MyString
+  id_estado: 1
+  estado_loggeable_id: 
+  estado_loggeable_type: Estado loggeable
+
+two:
+  motivo: MyString
+  id_estado: 1
+  estado_loggeable_id: 
+  estado_loggeable_type: Estado loggeable

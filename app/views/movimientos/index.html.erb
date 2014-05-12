@@ -1,0 +1,38 @@
+<%= set_title "Movimientos" %>
+
+<div class="btnbar">
+	<%= link_to_new 'Nuevo movimiento', new_movimiento_path %>
+  <%= link_to_action 'Consultar movimientos', { action: 'consultar' }, { class: 'btnsearch' } %>
+</div>
+
+<%= render_notice notice %>
+
+<table class="data">
+  <thead>
+    <tr>
+      <th>Fecha</th>
+      <th>Móvil</th>
+      <th>Chofer</th>      
+      <th>Transacción</th>
+      <th>Observación</th>
+      <th>Importe</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @movimientos.each do |movimiento| %>
+      <tr>
+        <td class="ac"><%= movimiento.fecha_movimiento.strftime('%d/%m/%Y') %></td>
+        <td class="ar"><%= movimiento.movil.nromovil %></td>
+        <td><%= movimiento.chofer.nombre %></td>
+        <td><%= movimiento.transaccion.descripcion %></td>
+        <td><%= movimiento.observacion %></td>
+        <td class="ar"><%= number_to_currency movimiento.importe %></td>
+        <td class="action"><%= link_to_edit edit_movimiento_path(movimiento) %></td>
+        <td class="action"><%= link_to_delete movimiento %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

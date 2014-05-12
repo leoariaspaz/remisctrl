@@ -1,0 +1,19 @@
+<div id="logs_estados">
+	<table>
+		<caption>
+			Registro de Estados
+		</caption>
+		<tr>
+			<th>Estado</th>
+			<th>Motivo</th>
+			<th>Desde</th>
+		</tr>
+	<% logs.order(created_at: :desc).each do |l| %>
+		<tr>
+			<td class="estado"><%= l.send("estado_#{params[:controller].singularize}") %></td>
+			<td class="motivo"><%= l.motivo %></td>
+			<td class="desde"><%= l.created_at.to_s(:short_date_time) %></td>			
+		</tr>
+	<% end %>
+	</table>
+</div>

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  nombre: MyString
+  nrodoc: 1
+  tipo_doc_id: 
+  fecha_alta: 2013-11-19
+  estado_id: 
+  fecha_estado: 2013-11-19
+
+two:
+  nombre: MyString
+  nrodoc: 1
+  tipo_doc_id: 
+  fecha_alta: 2013-11-19
+  estado_id: 
+  fecha_estado: 2013-11-19

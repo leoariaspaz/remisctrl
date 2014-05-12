@@ -1,0 +1,30 @@
+<%= form_for(@movimiento) do |f| %>
+  <%= render_error @movimiento, 'El movimiento' %>
+
+  <div class="field">
+    <%= f.label :fecha_movimiento %><br>
+    <%= f.date_select :fecha_movimiento %>
+  </div>
+  <div class="field">
+    <%= f.label :transaccion %><br>
+    <%= f.select :transaccion_id, @transacciones, prompt: "(Seleccione)" %>
+  </div>
+  <div class="field">
+    <%= f.label :observacion %><br>
+    <%= f.text_field :observacion %>
+  </div>
+  <div class="field">
+    <%= f.label :importe %><br>
+    <%= f.text_field :importe %>
+  </div>  
+  <div class="field">
+    <%= f.label :movil %><br>
+    <%= f.select :agencia_id, @agencias, prompt: "(Seleccione)" %>
+    <%= f.select :movil_id, @moviles, prompt: "(Seleccione)" %>
+  </div>
+  <div class="field">
+    <%= f.label :chofer %><br>
+    <%= f.select :chofer_id, @choferes, prompt: "(Seleccione)" %>
+  </div>
+  <%= form_actions(movimientos_path) %>
+<% end %>

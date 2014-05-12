@@ -1,0 +1,92 @@
+<% content_for :scripts do %>
+    <%= stylesheet_link_tag "jqmodal", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "jqmodal", "data-turbolinks-track" => true %>
+    <style type="text/css">
+      .jqmWindow {
+        height: 100px;
+        margin-left: -175px;
+        margin-top: -50px;
+        width: 350px;
+      }
+    </style>
+    <script type="text/javascript" data-turbolinks-track="true">
+      function confirm(href) {
+        function setHref(link, url) {
+          $(link).click(function (e) {
+            e.preventDefault();
+            window.location.href = url;
+            $('#dialog').jqmHide();
+          })
+        }
+
+        setHref('.btnbar .btnyes', href + '?wa=1');
+        setHref('.btnbar .btnno', href + '?wa=0');
+        $('#dialog').jqmShow();
+      }
+      $(document).on('ready page:load', function(event) {
+        $('#dialog').jqm({ modal: true });
+      });
+      $(document).on('click', 'td.print a', function(event) {
+        event.preventDefault();
+        confirm(this.href);
+      });      
+    </script>
+<% end %>
+
+<%= set_title "Móviles" %>
+
+<div class="btnbar">
+  <%= link_to_new 'Nuevo móvil', new_movil_path %>
+</div>
+
+<%= render_notice notice %>
+
+<table class="data">
+  <thead>
+    <tr>
+      <th>Nº</th>
+      <th>Marca</th>
+      <th>Modelo</th>
+      <th>Dominio</th>
+      <th>Estado</th>
+      <th>Agencia</th>
+      <th>Propietario</th>
+      <th>Chofer</th>
+      <th></th>      
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @moviles.each do |movil| %>
+      <tr>
+        <td class="ac"><%= link_to movil.nromovil, movil %></td>
+        <td><%= movil.marca %></td>
+        <td class="ac"><%= movil.modelo %></td>
+        <td class="ac"><%= movil.dominio %></td>
+        <td><%= movil.estado.descripcion %> desde <%= format_date movil.fecha_estado %></td>
+        <td><%= movil.agencia.descripcion unless movil.agencia.nil? %></td>
+        <td><%= movil.propietario.nombre unless movil.propietario.nil? %></td>
+        <td><%= movil.chofer.nombre unless movil.chofer.nil? %></td>
+        <td class="action"><%= link_to_edit edit_movil_path(movil) %></td>
+        <td class="action"><%= link_to_delete movil %></td>
+        <td class="action print">
+          <%= link_to_print({ id: movil }, { alt: "imprimir legajo", title: "imprimir legajo" }) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="jqmWindow" id="dialog">
+  <div class="content">
+    <%= image_tag "close_button.gif", alt: "Cerrar", title: "cerrar", class: 'jqmClose btnwinclose' %>
+    <p>¿Desea imprimir los legajos relacionados del propietario y el chofer?</p>
+    <div class="btnbar">
+      <%= link_to "Sí", '#', {class: 'btnaction btnyes'}  %>
+      <%= link_to "No", '#', {class: 'btnaction btnno'} %>
+      <a href="#" class="jqmClose btnaction">Cancelar</a>
+    </div>      
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<%= form_for([@documentable, @documento]) do |f| %>
+  <%= render_error @documento, 'El documento' %>  
+  
+  <div class="field">
+    <%= f.label :tipo_imagen_id %><br>
+    <%= f.select :tipo_imagen_id, @tipos_imagen, prompt: "(Seleccione)" %>
+  </div>	
+  <div class="field">
+    <%= f.label :imagen %><br>
+    <%= f.file_field :imagen %>
+    <%= f.hidden_field :imagen_cache %>
+  </div>
+  <%= form_actions url_for(@documentable) %>
+<% end %>

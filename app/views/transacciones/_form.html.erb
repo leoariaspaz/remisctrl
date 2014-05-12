@@ -1,0 +1,23 @@
+<%= form_for(@transaccion) do |f| %>
+  <%= render_error @transaccion, 'La transacción' %>
+  <div class="field">
+    <%= f.label :descripcion %><br>
+    <%= f.text_field :descripcion %>
+  </div>
+  <div class="field">
+    <%= f.label :sintetico %><br>
+    <%= f.text_field :sintetico %>
+  </div>
+  <div class="field">
+    <label for="tipo">Tipo de transacción:</label>
+    <% Transaccion::TipoTransaccion.each do |k, v| %>
+      <br><%= radio_button_tag 'transaccion[tipo]', k, @transaccion.tipo == k.to_s %>
+      <%= v.humanize %>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :activo %><br/>
+    <%= check_box "transaccion", "activo" %>
+  </div>
+  <%= form_actions(transacciones_path) %>  
+<% end %>

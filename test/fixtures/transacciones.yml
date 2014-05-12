@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  descripcion: MyString
+  sintetico: MyString
+  es_debito: false
+
+two:
+  descripcion: MyString
+  sintetico: MyString
+  es_debito: false

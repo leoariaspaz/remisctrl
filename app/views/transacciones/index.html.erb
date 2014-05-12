@@ -1,0 +1,35 @@
+<%= set_title "Transacciones" %>
+
+<div class="btnbar">
+  <%= link_to_new 'Nueva transacción', new_transaccion_path %>
+</div>
+
+<%= render_notice notice %>
+
+<table class="data">
+  <thead>
+    <tr>
+      <th>Código</th>
+      <th>Descripción</th>
+      <th>Sintético</th>
+      <th>Tipo</th>
+      <th>Activo</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @transacciones.each do |transaccion| %>
+      <tr>
+        <th><%= transaccion.id %></th>
+        <td><%= transaccion.descripcion %></td>
+        <td><%= transaccion.sintetico %></td>
+        <td><%= (transaccion.es_debito)? "Débito":"Crédito" %></td>
+        <td class="ac"><%= check_box_tag 'activo', "1", transaccion.activo, disabled: true %></td>
+        <td class="action"><%= link_to_edit edit_transaccion_path(transaccion) %></td>
+        <td class="action"><%= link_to_delete transaccion %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

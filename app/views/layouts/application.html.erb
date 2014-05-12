@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= content_title %> | RemisCtrl</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  <%= content_for :scripts %>
+</head>
+<body>
+
+<div id="content">
+	<div id="topbar">
+		<div id="topbarwrapper">
+			<span id="date"><%= I18n.l Time.now, format: "%A %d de %B del %Y" %></span>		
+			<div id="userdata">
+				<%= session[:usuario_nombre] %> |
+				<%= link_to "Cambiar contraseña", edit_usuario_path(session[:usuario_id]) %> |
+				<%= link_to "Cerrar sesión", logout_path, method: :delete, data: nil %>
+			</div>
+		</div>
+	</div>	
+	<div id="header">
+		<div id="logo">
+			<%= image_tag image_path("taxi.png"), alt: "logo" %>
+		</div>
+		<ul id="mainlinks">
+			<li><%= link_to_moviles_index %></li>
+			<li><%= link_to_index model_name: "propietario" %></li>
+			<li><%= link_to_index model_name: "chofer" %></li>
+			<li><%= link_to_index model_name: "movimiento" %></li>
+			<li><%= link_to_config_index %></li>
+		</ul>		
+	</div>
+	<div id="maincontent">
+		<%= yield %>
+	</div>	
+</div>
+
+<div id="footer"></div>
+
+</body>
+</html>

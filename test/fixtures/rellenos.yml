@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  codigo: 1
+  descripcion: MyString
+  sintetico: MyString
+  habilitado: false
+  tipo_relleno_id: 
+
+two:
+  codigo: 1
+  descripcion: MyString
+  sintetico: MyString
+  habilitado: false
+  tipo_relleno_id: 

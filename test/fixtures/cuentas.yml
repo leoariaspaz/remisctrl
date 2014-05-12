@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  chofer_id: 
+  movil_id: 
+  estado: 1
+  saldo_anterior: 9.99
+
+two:
+  chofer_id: 
+  movil_id: 
+  estado: 1
+  saldo_anterior: 9.99

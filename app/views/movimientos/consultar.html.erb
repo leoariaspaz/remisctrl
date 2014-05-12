@@ -1,0 +1,30 @@
+<%= set_title "Consultar movimientos" %>
+
+<%= form_for(@movimientos_search, as: :search, url: url_for(action: 'consultar_agrupado'), 
+			include_id: false, method: :get) do |f| %>
+  <% if @movimientos_search.errors.any? %>
+    <div id="error_explanation">
+      <h2>No se pudo realizar la consulta:</h2>
+      <ul>
+      <% @movimientos_search.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :tipo_informe, 'Agrupado por:' %><br>
+    <%= f.select :tipo_informe, MovimientoSearch.tipos_informe %>
+  </div>
+  <div class="field inline">
+    <%= f.label :fecha_desde, 'Fecha' %><br>
+    <%= f.date_select :fecha_desde %> al 
+    <%= f.date_select :fecha_hasta %>
+  </div>
+  <div class="field inline">
+    <%= f.label :nromovil_desde, 'Número de móvil' %><br>
+    <%= f.number_field :nromovil_desde, class: 'ar' %> al 
+    <%= f.number_field :nromovil_hasta, class: 'ar' %>
+  </div>
+  <%= search_actions(movimientos_path) %>
+<% end %>

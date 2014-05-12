@@ -1,0 +1,39 @@
+<%= set_title "Propietarios" %>
+
+<div class="btnbar">
+  <%= link_to_new 'Nuevo propietario', new_propietario_path %>
+</div>
+
+<%= render_notice notice %>
+
+<table class="data">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th colspan="2">Documento</th>
+      <th>Fecha alta</th>
+      <th>Estado</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @propietarios.each do |propietario| %>
+      <tr>
+        <td><%= link_to propietario.nombre, propietario %></td>
+        <td><%= propietario.tipo_doc.sintetico %></td>
+        <td class="ar"><%= propietario.nrodoc %></td>
+        <td class="ac"><%= format_date propietario.fecha_alta %></td>
+        <td><%= propietario.estado.descripcion %> desde el <%= format_date propietario.fecha_estado %></td>
+        <td class="action"><%= link_to_edit edit_propietario_path(propietario) %></td>
+        <td class="action"><%= link_to_delete propietario %></td>
+        <td class="action">
+          <%= link_to_print({ id: propietario }, { alt: "imprimir legajo", title: "imprimir legajo" }) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

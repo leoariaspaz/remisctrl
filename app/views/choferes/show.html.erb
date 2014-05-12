@@ -1,0 +1,46 @@
+<%= set_title "Datos del chofer" %>
+
+<div id="details">
+	<p>
+		<strong>Nombre:</strong>
+		<%= @chofer.nombre %>
+	</p>
+
+	<p>
+		<strong>Apodo:</strong>
+		<%= @chofer.apodo %>
+	</p>
+
+	<p>
+		<strong>Estado:</strong>
+		<%= @chofer.estado.descripcion %> desde el <%= format_date @chofer.fechaestado %>
+	</p>
+
+	<p>
+		<strong>Credencial:</strong>
+		<%= @chofer.credencial %>
+	</p>
+
+	<p>
+		<strong>Vto. Carnet:</strong>
+		<%= format_date @chofer.vtocarnet %>
+	</p>
+
+	<p>
+		<strong>Dirección:</strong>
+		<%= @chofer.direccion %>
+	</p>
+
+	<p>
+		<strong>Teléfono:</strong>
+		<%= @chofer.telefono %>
+	</p>
+
+	<p>
+		<strong>Celular:</strong>
+		<%= @chofer.celular %>
+	</p>
+</div>
+
+<%= render 'logs_estado/list', logs: @chofer.logs_estado %>
+<%= render 'documentos/list', documentable: @chofer %>

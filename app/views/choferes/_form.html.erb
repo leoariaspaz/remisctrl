@@ -1,0 +1,60 @@
+<%= content_for :scripts do %>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('#chofer_estado_id').change(
+          function () {
+              var v = $(this).val();
+              var orig = $('#estado_original').val();
+              if (v == orig) {
+                  $('#motivo_estado').hide().removeClass('visible');
+              } else {
+                  $('#motivo_estado').show();
+              }
+          }
+      );
+    });
+  </script>
+<% end %>
+
+<%= form_for(@chofer) do |f| %>
+  <%= render_error @chofer, 'El chofer' %>
+
+  <div class="field">
+    <%= f.label :nombre %><br>
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="field">
+    <%= f.label :apodo %><br>
+    <%= f.text_field :apodo %>
+  </div>
+  <div class="field">
+    <%= f.label :estado_id %><br>
+    <%= f.select :estado_id, EstadoChofer.all_for_select, prompt: t('helpers.select.prompt')  %>
+  </div>
+  <%= render "logs_estado/cambiaestado", form: f, entity: @chofer %>
+  <div class="field">
+    <%= f.label :fechaestado %><br>
+    <%= f.date_select :fechaestado %>
+  </div>
+  <div class="field">
+    <%= f.label :credencial %><br>
+    <%= f.number_field :credencial %>
+  </div>  
+  <div class="field">
+    <%= f.label :vtocarnet %><br>
+    <%= f.date_select :vtocarnet %>
+  </div>
+  <div class="field">
+    <%= f.label :direccion %><br>
+    <%= f.text_field :direccion %>
+  </div>
+  <div class="field">
+    <%= f.label :telefono %><br>
+    <%= f.text_field :telefono %>
+  </div>
+  <div class="field">
+    <%= f.label :celular %><br>
+    <%= f.text_field :celular %>
+  </div>
+  <%= form_actions(choferes_path) %>
+<% end %>

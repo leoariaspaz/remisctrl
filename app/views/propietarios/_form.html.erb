@@ -1,0 +1,27 @@
+<%= form_for(@propietario) do |f| %>
+  <%= render_error @propietario, 'El propietario' %>
+
+  <div class="field">
+    <%= f.label :nombre %><br>
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="field">
+    <%= f.label :nrodoc, 'Documento' %><br>
+    <%= f.select :tipo_doc_id, @tipo_docs %>
+    <%= f.number_field :nrodoc %>
+  </div>
+  <div class="field">
+    <%= f.label :fecha_alta %><br>
+    <%= f.date_select :fecha_alta %>
+  </div>
+  <div class="field">
+    <%= f.label :estado_id %><br>
+    <%= f.select :estado_id, @estados %>
+  </div>
+  <%= render "logs_estado/cambiaestado", form: f, entity: @propietario %>
+  <div class="field">
+    <%= f.label :fecha_estado %><br>
+    <%= f.date_select :fecha_estado %>
+  </div>
+  <%= form_actions(propietarios_path) %>  
+<% end %>

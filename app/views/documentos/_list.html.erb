@@ -1,0 +1,18 @@
+<div id="imglist">
+	<h2>Documentos relacionados</h2>
+	<div class="btnbar">
+	  <%= link_to_new 'Relacionar un nuevo documento', [:new, documentable, :documento] %>
+	</div>
+	<%= render_notice notice %>
+	<ul>
+	<% documentable.documentos.each do |d| %>
+		<li>
+			<%= link_to d.tipo_imagen.descripcion, [documentable, d] %>
+			<%= link_to_delete url_for([documentable, d]) %>
+		</li>
+	<% end %>
+	</ul>
+	<% if not documentable.documentos.any? %>
+		<span class="empty">No existen documentos relacionados</span>
+	<% end %>
+</div>

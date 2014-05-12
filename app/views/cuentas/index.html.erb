@@ -1,0 +1,33 @@
+<%= set_title "Cuentas" %>
+
+<div class="btnbar">
+	<%= link_to_new 'Nuevo cuenta', new_cuenta_path %>
+</div>
+
+<%= render_notice notice %>
+
+<table class="data">
+  <thead>
+    <tr>
+      <th>Chofer</th>
+      <th>Movil</th>
+      <th>Estado</th>
+      <th>Saldo anterior</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cuentas.each do |cuenta| %>
+      <tr>
+        <td><%= cuenta.chofer %></td>
+        <td><%= cuenta.movil %></td>
+        <td><%= cuenta.estado %></td>
+        <td><%= cuenta.saldo_anterior %></td>
+        <td class="action"><%= link_to_edit edit_cuenta_path(cuenta) %></td>
+        <td class="action"><%= link_to_delete cuenta %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

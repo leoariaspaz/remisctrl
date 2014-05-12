@@ -1,0 +1,30 @@
+<%= set_title "Configurar Usuarios" %>
+
+<%= link_to_new 'Nuevo usuario', new_usuario_path %>
+<br/>
+
+<p id="notice"><%= notice %></p>
+
+<table class="data">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th></th>
+      <th></th>      
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @usuarios.each do |usuario| %>
+      <tr>
+        <td><%= usuario.nombre.titleize %></td>
+        <td><%= link_to 'Resetear contraseña', 
+        								url_for(action: "reset_password", id: usuario), 
+        								method: :patch, 
+        								data: { confirm: "¿Está seguro que desea cambiar la " +
+        									  "contraseña del usuario #{usuario.nombre.titleize}?" } %></td>
+        <td><%= link_to_delete usuario %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

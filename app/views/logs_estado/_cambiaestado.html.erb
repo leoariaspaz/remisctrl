@@ -1,0 +1,27 @@
+<%= content_for :scripts do %>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('#<%= entity.class.name.downcase %>_estado_id').change(
+          function () {
+              var v = $(this).val();
+              var orig = $('#estado_original').val();
+              if (v == orig) {
+                  $('#motivo_estado').hide().removeClass('visible');
+              } else {
+                  $('#motivo_estado').show();
+              }
+          }
+      );
+    });
+  </script>
+<% end %>
+
+<% if !(entity.id.nil? || entity.id == 0) %>
+	<% aclass = 'field'
+		 aclass += ' visible' if entity.estado_id_changed? %>
+	<div id="motivo_estado" class="<%= aclass %>">
+		<%= hidden_field_tag :estado_id, entity.estado_id_was, {id: 'estado_original'} %>
+		<%= form.label :motivo_cambio_estado %><br/>
+		<%= form.text_field :motivo_cambio_estado %>
+	</div>
+<% end %>

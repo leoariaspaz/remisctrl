@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Iniciar sesión | RemisCtrl</title>
+  <%= stylesheet_link_tag "login", media: "all" %>  
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div id="outer">
+	<div id="loginform">
+		<%= form_tag  do %>
+			<fieldset>
+				<legend>
+					<%= image_tag "taxi.png", alt: "logo" %>
+					Iniciar sesión
+				</legend>
+				
+				<div class="msg">
+					<%= flash[:alert] %>
+				</div>				
+
+				<div class="field">
+					<%= label_tag :nombre, "Usuario" %>
+					<%= text_field_tag :nombre, params[:nombre] %>
+				</div>
+	
+				<div class="field">
+					<%= label_tag :password, "Contraseña" %>
+					<%= password_field_tag :password, params[:password] %>
+				</div>
+
+				<div class="action">
+					<%= button_tag "Iniciar sesión", type: "submit" %>
+				</div>
+			</fieldset>	
+		<% end %>
+	<div>
+</div>	
+	
+</body>
+</html>

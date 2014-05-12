@@ -1,0 +1,18 @@
+<%= form_for(@usuario) do |f| %>
+  <%= render_error @usuario, 'El usuario' %>
+<% if action_name == "new" %>
+  <div class="field">
+    <%= f.label :nombre %><br>
+    <%= f.text_field :nombre %>
+  </div>
+<% end %>
+  <div class="field">
+    <%= f.label :password %><br>
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation %><br>
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <%= form_actions(moviles_path) %>
+<% end %>

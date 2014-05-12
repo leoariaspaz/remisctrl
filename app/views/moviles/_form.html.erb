@@ -1,0 +1,78 @@
+<%= content_for :scripts do %>
+	<script type="text/javascript">
+		function show_detail(select, display, urlget) {
+			$(select).change(function() {
+				var v = $(this).val();
+				if (v === '') {
+					$(display).hide();
+				} else {
+					$.get(urlget + v).done(function(data) {
+						$(display).html(data).show();
+					});				
+				}
+			});						
+		}
+	
+		$(document).ready(function () {
+			show_detail('#movil_chofer_id', '#chofer_detail', '/choferes/detail_select/');
+			show_detail('#movil_propietario_id', '#propietario_detail', '/propietarios/detail_select/');
+      $('#movil_estado_id').change(
+          function () {
+              var v = $(this).val();
+              var orig = $('#estado_original').val();
+              if (v == orig) {
+                  $('#motivo_estado').hide().removeClass('visible');
+              } else {
+                  $('#motivo_estado').show();
+              }
+          }
+      );
+		});
+	</script>
+<% end %>
+
+<%= form_for(@movil) do |f| %>
+  <%= render_error @movil, 'El móvil' %>
+
+  <div class="field">
+    <%= f.label :nromovil %><br>
+    <%= f.number_field :nromovil %>
+  </div>
+  <div class="field">
+    <%= f.label :marca %><br>
+    <%= f.text_field :marca %>
+  </div>
+  <div class="field">
+    <%= f.label :modelo %><br>
+    <%= f.number_field :modelo %>
+  </div>
+  <div class="field">
+    <%= f.label :dominio %><br>
+    <%= f.text_field :dominio %>
+  </div>
+  <div class="field">
+    <%= f.label :estado_id %><br>
+    <%= f.select :estado_id, @estados %>
+  </div>
+  <%= render "logs_estado/cambiaestado", form: f, entity: @movil %>
+  <div class="field">
+    <%= f.label :fecha_estado %><br>
+    <%= f.date_select :fecha_estado %>
+  </div>
+  <div class="field">
+    <%= f.label :agencia_id %><br>
+    <%= f.select :agencia_id, @agencias, include_blank: "(Ninguna)" %>
+  </div>
+  <div class="field">
+    <%= f.label :propietario_id %><br>
+    <%= f.select :propietario_id, @propietarios, include_blank: "(Ninguno)" %>
+    <div id="propietario_detail" class="details" style="display: none;"></div>
+  </div>
+  <div class="field">
+    <%= f.label :chofer_id %><br>
+    <%= f.select :chofer_id, @choferes, include_blank: "(Ninguno)" %>
+    <div id="chofer_detail" class="details" style="display: none;"></div>
+  </div>
+  <%= form_actions(moviles_path) %>
+<% end %>
+

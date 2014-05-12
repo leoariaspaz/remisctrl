@@ -1,0 +1,24 @@
+<%= form_for(@relleno) do |f| %>
+	<%= render_error @relleno, 'El registro' %>
+
+  <div class="field">
+    <%= f.label :codigo, 'Código' %><br>
+    <%= f.number_field :codigo %>
+  </div>
+  <div class="field">
+    <%= f.label :descripcion, 'Descripción' %><br>
+    <%= f.text_field :descripcion %>
+  </div>
+  <div class="field">
+    <%= f.label :sintetico, 'Sintético' %><br>
+    <%= f.text_field :sintetico %>
+  </div>
+  <div class="field">
+    <%= f.label :habilitado %><br>
+    <%= f.check_box :habilitado %>
+  </div>
+  <div>
+  	<%= f.hidden_field :tipo_relleno_id %>
+  </div>
+  <%= form_actions(rellenos_url(id: @relleno.tipo_relleno_id)) %>
+<% end %>

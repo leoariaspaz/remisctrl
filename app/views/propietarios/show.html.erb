@@ -1,0 +1,26 @@
+<%= set_title "Datos del propietario" %>
+
+<div id="details">
+	<p>
+		<strong>Nombre:</strong>
+		<%= @propietario.nombre %>
+	</p>
+
+	<p>
+		<strong>Documento:</strong>
+		<%= @propietario.tipo_doc.sintetico %> <%= @propietario.nrodoc %>
+	</p>
+
+	<p>
+		<strong>Fecha de Alta:</strong>
+		<%= @propietario.fecha_alta %>
+	</p>
+
+	<p>
+		<strong>Estado:</strong>
+		<%= @propietario.estado.descripcion %> desde el <%= format_date @propietario.fecha_estado %>
+	</p>
+</div>
+
+<%= render 'logs_estado/list', logs: @propietario.logs_estado %>
+<%= render 'documentos/list', documentable: @propietario %>

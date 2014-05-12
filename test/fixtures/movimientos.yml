@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  transaccion_id: 
+  observacion: MyString
+  importe: 9.99
+  movil_id: 
+  chofer_id: 
+
+two:
+  transaccion_id: 
+  observacion: MyString
+  importe: 9.99
+  movil_id: 
+  chofer_id: 

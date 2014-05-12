@@ -1,0 +1,24 @@
+// Place all the styles related to the Configuracion controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+$verde: 			#468966;
+$crema: 			#fff0a5;
+$ocre: 				#ffb03b;
+$naranja: 		#b64926;
+$rojo: 				#8e2800;
+$font-stack1-:	verdana, arial, helvetica, sans-serif;
+$font-stack1: Trebuchet, Tahoma, Arial, sans-serif;
+$font-stack2-: arial, helvetica, sans-serif;
+$font-stack2: Futura, 'Century Gothic', AppleGothic, sans-serif;
+$font-stack-body: Garamond, 'Hoefler Text', 'Times New Roman', Times, serif;
+
+#opciones {
+	margin-top: 10px;
+	li {
+		list-style-type: square;
+		a:link, a:visited {
+			color: $verde;
+		}		
+	}
+}
+

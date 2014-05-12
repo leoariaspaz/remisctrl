@@ -1,0 +1,60 @@
+              Prefix Verb   URI Pattern                                      Controller#Action
+      tipos_imagenes GET    /tipos_imagenes(.:format)                        tipos_imagenes#index
+                     POST   /tipos_imagenes(.:format)                        tipos_imagenes#create
+     new_tipo_imagen GET    /tipos_imagenes/new(.:format)                    tipos_imagenes#new
+    edit_tipo_imagen GET    /tipos_imagenes/:id/edit(.:format)               tipos_imagenes#edit
+         tipo_imagen GET    /tipos_imagenes/:id(.:format)                    tipos_imagenes#show
+                     PATCH  /tipos_imagenes/:id(.:format)                    tipos_imagenes#update
+                     PUT    /tipos_imagenes/:id(.:format)                    tipos_imagenes#update
+                     DELETE /tipos_imagenes/:id(.:format)                    tipos_imagenes#destroy
+    movil_documentos GET    /moviles/:movil_id/documentos(.:format)          documentos#index
+                     POST   /moviles/:movil_id/documentos(.:format)          documentos#create
+ new_movil_documento GET    /moviles/:movil_id/documentos/new(.:format)      documentos#new
+edit_movil_documento GET    /moviles/:movil_id/documentos/:id/edit(.:format) documentos#edit
+     movil_documento GET    /moviles/:movil_id/documentos/:id(.:format)      documentos#show
+                     PATCH  /moviles/:movil_id/documentos/:id(.:format)      documentos#update
+                     PUT    /moviles/:movil_id/documentos/:id(.:format)      documentos#update
+                     DELETE /moviles/:movil_id/documentos/:id(.:format)      documentos#destroy
+             moviles GET    /moviles(.:format)                               moviles#index
+                     POST   /moviles(.:format)                               moviles#create
+           new_movil GET    /moviles/new(.:format)                           moviles#new
+          edit_movil GET    /moviles/:id/edit(.:format)                      moviles#edit
+               movil GET    /moviles/:id(.:format)                           moviles#show
+                     PATCH  /moviles/:id(.:format)                           moviles#update
+                     PUT    /moviles/:id(.:format)                           moviles#update
+                     DELETE /moviles/:id(.:format)                           moviles#destroy
+        propietarios GET    /propietarios(.:format)                          propietarios#index
+                     POST   /propietarios(.:format)                          propietarios#create
+     new_propietario GET    /propietarios/new(.:format)                      propietarios#new
+    edit_propietario GET    /propietarios/:id/edit(.:format)                 propietarios#edit
+         propietario GET    /propietarios/:id(.:format)                      propietarios#show
+                     PATCH  /propietarios/:id(.:format)                      propietarios#update
+                     PUT    /propietarios/:id(.:format)                      propietarios#update
+                     DELETE /propietarios/:id(.:format)                      propietarios#destroy
+                     GET    /propietarios/detail_select/:id(.:format)        propietarios#detail_select
+            choferes GET    /choferes(.:format)                              choferes#index
+                     POST   /choferes(.:format)                              choferes#create
+          new_chofer GET    /choferes/new(.:format)                          choferes#new
+         edit_chofer GET    /choferes/:id/edit(.:format)                     choferes#edit
+              chofer GET    /choferes/:id(.:format)                          choferes#show
+                     PATCH  /choferes/:id(.:format)                          choferes#update
+                     PUT    /choferes/:id(.:format)                          choferes#update
+                     DELETE /choferes/:id(.:format)                          choferes#destroy
+                     GET    /choferes/detail_select/:id(.:format)            choferes#detail_select
+            rellenos GET    /rellenos(.:format)                              rellenos#index
+                     POST   /rellenos(.:format)                              rellenos#create
+         new_relleno GET    /rellenos/new(.:format)                          rellenos#new
+        edit_relleno GET    /rellenos/:id/edit(.:format)                     rellenos#edit
+             relleno GET    /rellenos/:id(.:format)                          rellenos#show
+                     PATCH  /rellenos/:id(.:format)                          rellenos#update
+                     PUT    /rellenos/:id(.:format)                          rellenos#update
+                     DELETE /rellenos/:id(.:format)                          rellenos#destroy
+                     GET    /rellenos/new/:tipo_relleno_id(.:format)         rellenos#new
+       tipos_relleno GET    /tipos_relleno(.:format)                         tipos_relleno#index
+                     POST   /tipos_relleno(.:format)                         tipos_relleno#create
+    new_tipo_relleno GET    /tipos_relleno/new(.:format)                     tipos_relleno#new
+   edit_tipo_relleno GET    /tipos_relleno/:id/edit(.:format)                tipos_relleno#edit
+        tipo_relleno GET    /tipos_relleno/:id(.:format)                     tipos_relleno#show
+                     PATCH  /tipos_relleno/:id(.:format)                     tipos_relleno#update
+                     PUT    /tipos_relleno/:id(.:format)                     tipos_relleno#update
+                     DELETE /tipos_relleno/:id(.:format)                     tipos_relleno#destroy

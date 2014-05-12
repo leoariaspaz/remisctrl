@@ -1,0 +1,9 @@
+<%= form_for(@configuracion) do |f| %>
+  <%= render_error @configuracion, 'El configuracion' %>
+
+  <div class="field">
+    <%= f.label :fecha_proceso %><br>
+    <%= f.date_select :fecha_proceso %>
+  </div>
+  <%= form_actions(configuracion_index_path) %>
+<% end %>

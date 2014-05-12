@@ -1,0 +1,36 @@
+<%= set_title "Choferes" %>
+
+<div class="btnbar">
+  <%= link_to_new 'Nuevo chofer', new_chofer_path %>
+</div>
+
+<%= render_notice notice %>
+
+<table class="data">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Apodo</th>
+      <th>Estado</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @choferes.each do |chofer| %>
+      <tr class="<%= cycle("alt", "") %>">
+        <td><%= link_to chofer.nombre, chofer %></td>
+        <td><%= chofer.apodo %></td>
+        <td><%= chofer.estado.descripcion%> desde el <%= format_date chofer.fechaestado%></td>
+        <td class="action"><%= link_to_edit edit_chofer_path(chofer) %></td>
+        <td class="action"><%= link_to_delete chofer %></td>
+        <td class="action">
+          <%= link_to_print({ id: chofer }, { alt: "imprimir legajo", title: "imprimir legajo" }) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

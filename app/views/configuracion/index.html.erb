@@ -1,0 +1,18 @@
+<%= set_title "Configuración" %>
+
+<%= render_notice notice %>
+
+<ul id="opciones">
+	<li>
+		<%= link_to_if is_admin, "Configuración general", edit_configuracion_path(Configuracion.find.id) %>
+	</li>
+	<li>
+		<%= link_to "Configurar datos de relleno", rellenos_path %>
+	</li>
+	<li>
+		<%= link_to "Configurar transacciones", transacciones_path %>
+	</li>
+	<li>
+		<%= link_to_if is_admin, "Administrar usuarios", usuarios_path %>
+	</li>
+</li>	

@@ -1,0 +1,29 @@
+<%= set_title "Tipos de relleno" %>
+
+<p id="notice"><%= notice %></p>
+
+<table class="data">
+  <thead>
+    <tr>
+      <th>Código</th>
+      <th>Descripcion</th>      
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tipos_relleno.each do |tipo_relleno| %>
+      <tr>
+      	<td><%= tipo_relleno.codigo%></td>
+        <td><%= tipo_relleno.descripcion %></td>
+        <td class="action"><%= link_to 'Editar', edit_tipo_relleno_path(tipo_relleno) %></td>
+        <td class="action"><%= link_to 'Eliminar', tipo_relleno, method: :delete, data: { confirm: t('helpers.destroy.confirm') } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nuevo Tipo relleno', new_tipo_relleno_path %>
