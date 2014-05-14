@@ -5,7 +5,7 @@
 					prompt: t('helpers.select.prompt'), onchange: "this.form.submit();") %>
 <% end -%>
 
-<p id="notice"><%= notice %></p>
+<%= render_notice notice %>
 
 <p>
 	<%= link_to_new 'Nuevo valor', url_for(action: :new, tipo_relleno_id: @value) unless not @value.present? %>
