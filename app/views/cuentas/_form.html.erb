@@ -23,15 +23,15 @@
 
   <div class="field">
     <%= f.label :chofer %><br/>
-    <%= f.select :chofer_id, @choferes, prompt: "(Seleccione)" %>
+    <%= f.select :chofer_id, @choferes, prompt: t('helpers.select.prompt') %>
   </div>
   <div class="field">
     <%= f.label :agencia %><br/>
-    <%= f.select :agencia_id, @agencias, prompt: "(Seleccione)" %>
+    <%= f.select :agencia_id, @agencias, prompt: t('helpers.select.prompt') %>
   </div>
   <div class="field">
     <%= f.label :movil %><br/>
-    <%= f.select :movil_id, @moviles, prompt: "(Seleccione)" %>
+    <%= f.select :movil_id, @moviles, prompt: t('helpers.select.prompt') %>
   </div>
   <div class="field">
     <%= f.label :estado %><br/>
