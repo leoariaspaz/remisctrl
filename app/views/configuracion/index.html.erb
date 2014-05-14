@@ -4,7 +4,7 @@
 
 <ul id="opciones">
 	<li>
-		<%= link_to_if is_admin, "Configuración general", edit_configuracion_path(Configuracion.find.id) %>
+		<%= link_to_if is_admin, "Configuración general", edit_configuracion_path(Configuracion.current.id) %>
 	</li>
 	<li>
 		<%= link_to "Configurar datos de relleno", rellenos_path %>
