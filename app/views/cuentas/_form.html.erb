@@ -1,20 +1,44 @@
+<%= content_for :scripts do %>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('#cuenta_agencia_id').change(
+          function () {
+              $.get("<%= url_for(action: 'getmovilbyagencia', id: 1) %>");
+              return;
+              var v = $(this).val();
+              var orig = $('#estado_original').val();
+              if (v == orig) {
+                  $('#motivo_estado').hide().removeClass('visible');
+              } else {
+                  $('#motivo_estado').show();
+              }
+          }
+      );
+    });
+  </script>
+<% end %>
+
 <%= form_for(@cuenta) do |f| %>
   <%= render_error @cuenta, 'El cuenta' %>
 
   <div class="field">
-    <%= f.label :chofer %><br>
-    <%= f.text_field :chofer %>
+    <%= f.label :chofer %><br/>
+    <%= f.select :chofer_id, @choferes, prompt: "(Seleccione)" %>
   </div>
   <div class="field">
-    <%= f.label :movil %><br>
-    <%= f.text_field :movil %>
+    <%= f.label :agencia %><br/>
+    <%= f.select :agencia_id, @agencias, prompt: "(Seleccione)" %>
   </div>
   <div class="field">
-    <%= f.label :estado %><br>
+    <%= f.label :movil %><br/>
+    <%= f.select :movil_id, @moviles, prompt: "(Seleccione)" %>
+  </div>
+  <div class="field">
+    <%= f.label :estado %><br/>
     <%= f.number_field :estado %>
   </div>
   <div class="field">
-    <%= f.label :saldo_anterior %><br>
+    <%= f.label :saldo_anterior %><br/>
     <%= f.text_field :saldo_anterior %>
   </div>
   <%= form_actions(cuentas_path) %>

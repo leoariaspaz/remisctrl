@@ -1,5 +1,6 @@
 class CuentasController < ApplicationController
-  before_action :set_cuenta, only: [:show, :edit, :update, :destroy]
+  before_action :set_cuenta, only: [:edit, :update, :destroy]
+  before_action :set_selects, only: [:new, :create, :edit, :update]  
 
   # GET /cuentas
   def index
@@ -55,6 +56,12 @@ class CuentasController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_cuenta
       @cuenta = Cuenta.find(params[:id])
+    end
+
+    def set_selects
+      @choferes = Chofer.all_for_select
+      @moviles = Movil.all_for_select
+      @agencias = Agencia.all_for_select      
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

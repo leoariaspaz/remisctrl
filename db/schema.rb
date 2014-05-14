@@ -107,14 +107,10 @@ ActiveRecord::Schema.define(version: 20140511011221) do
     t.date     "fecha_proceso"
     t.string   "observacion"
     t.decimal  "importe",          precision: 18, scale: 2
-    t.integer  "movil_id"
-    t.integer  "chofer_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "movimientos", ["chofer_id"], name: "index_movimientos_on_chofer_id"
-  add_index "movimientos", ["movil_id"], name: "index_movimientos_on_movil_id"
   add_index "movimientos", ["transaccion_id"], name: "index_movimientos_on_transaccion_id"
 
   create_table "propietarios", force: true do |t|

@@ -8,5 +8,7 @@ class CreateCuentas < ActiveRecord::Migration
 
       t.timestamps
     end
+    remove_reference :movimientos, :movil, index: true
+    remove_reference :movimientos, :chofer, index: true
   end
 end
