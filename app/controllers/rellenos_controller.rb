@@ -33,7 +33,7 @@ class RellenosController < ApplicationController
     respond_to do |format|
       if @relleno.save
       	set_index_url
-        format.html { redirect_to @index_url, notice: t('scaffold.save_notice') }
+        format.html { redirect_to @index_url, notice: t('scaffold.save_msg', entity: @relleno.tipo_relleno.descripcion.downcase) }
         format.json { render action: 'index', status: :created, location: @relleno }
       else
         format.html { render action: 'new' }
@@ -47,7 +47,7 @@ class RellenosController < ApplicationController
   def update
     respond_to do |format|
       if @relleno.update(relleno_params)      	
-        format.html { redirect_to @index_url, notice: t('scaffold.save_notice') }
+        format.html { redirect_to @index_url, notice: t('scaffold.update_msg', entity: "de " + @relleno.tipo_relleno.descripcion.downcase) }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
