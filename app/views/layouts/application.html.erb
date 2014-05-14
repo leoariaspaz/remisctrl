@@ -12,7 +12,7 @@
 <div id="content">
 	<div id="topbar">
 		<div id="topbarwrapper">
-			<span id="date"><%= I18n.l Time.now, format: "%A %d de %B del %Y" %></span>		
+			<span id="date"><%= I18n.l(Time.now, format: "%A %d de %B del %Y").camelize %></span>		
 			<div id="userdata">
 				<%= session[:usuario_nombre] %> |
 				<%= link_to "Cambiar contraseña", edit_usuario_path(session[:usuario_id]) %> |
@@ -28,6 +28,7 @@
 			<li><%= link_to_moviles_index %></li>
 			<li><%= link_to_index model_name: "propietario" %></li>
 			<li><%= link_to_index model_name: "chofer" %></li>
+			<li><%= link_to_index model_name: "cuenta" %></li>
 			<li><%= link_to_index model_name: "movimiento" %></li>
 			<li><%= link_to_config_index %></li>
 		</ul>		
