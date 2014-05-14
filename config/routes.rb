@@ -1,5 +1,9 @@
 Remisctrl::Application.routes.draw do
-  resources :cuentas
+  resources :cuentas do
+    member do
+      get 'getmovilbyagencia' => 'cuentas#getmovilbyagencia'
+    end
+  end
 
   resources :configuraciones, only: [:edit, :update]
 
