@@ -20,7 +20,7 @@ class Chofer < ActiveRecord::Base
   end
   
   def self.all_for_select
-		Chofer.all.map{|c| ["#{c.nombre} (#{c.apodo})", c.id]}
+		Chofer.all.order(:nombre, :apodo).map{|c| ["#{c.nombre} (#{c.apodo})", c.id]}
   end
   
   def self.all_for_validate_inclusion
