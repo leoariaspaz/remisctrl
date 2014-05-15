@@ -52,8 +52,8 @@ class Movil < ActiveRecord::Base
     end
   end
 
-  def self.all_for_validate_inclusion
-    Movil.all_for_select.map{|t| t[1]}
+  def self.all_for_validate_inclusion(agencia_id = nil)
+    Movil.all_for_select(agencia_id).map{|t| t[1]}
   end  
 
 protected
