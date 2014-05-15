@@ -3,7 +3,8 @@ class Agencia
 		Relleno
 			.where(habilitado: true)
 			.joins(:tipo_relleno)
-			.where('tipos_relleno.codigo = 1')		
+			.where('tipos_relleno.codigo = 1')
+			.order(:descripcion)
 	end
 
   def self.all_for_select

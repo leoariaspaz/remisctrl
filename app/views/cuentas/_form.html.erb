@@ -1,19 +1,26 @@
 <%= content_for :scripts do %>
-  <script type="text/javascript">
+  <script type="text/javascript" data-turbolinks-track="true">
     $(document).ready(function () {
       $('#cuenta_agencia_id').change(
           function () {
-              $.get("<%= url_for(action: 'getmovilbyagencia', id: 1) %>");
-              return;
-              var v = $(this).val();
-              var orig = $('#estado_original').val();
-              if (v == orig) {
-                  $('#motivo_estado').hide().removeClass('visible');
+              var opt_seleccione = $('<option/>').attr('value', '').text('(Seleccione');
+              var select = $('#cuenta_movil_id');
+              var onDone = function (moviles) {
+                select.html(opt_seleccione);
+                for (var i = 0; i < moviles.length; i++) {
+                  opt = $('<option/>').attr('value', moviles[i].id).text(moviles[i].nromovil);
+                  select.append(opt);
+                };                
+              };
+              if ($(this).val() !== '') {
+                $.get('/cuentas/' + $(this).val() + '/getmovilbyagencia').done(onDone);
               } else {
-                  $('#motivo_estado').show();
-              }
+                select.html(opt_seleccione);
+              };
+              return;
           }
       );
+      $('#cuenta_agencia_id').change();
     });
   </script>
 <% end %>

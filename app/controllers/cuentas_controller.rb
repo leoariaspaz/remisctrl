@@ -52,6 +52,12 @@ class CuentasController < ApplicationController
     end
   end
 
+  def getmovilbyagencia
+    params.permit(:id)
+    @moviles = Movil.where(agencia_id: params[:id]).select(:id, :nromovil).order(:nromovil)
+    render json: @moviles
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cuenta
@@ -60,8 +66,13 @@ class CuentasController < ApplicationController
 
     def set_selects
       @choferes = Chofer.all_for_select
-      @moviles = Movil.all_for_select
-      @agencias = Agencia.all_for_select      
+      @agencias = Agencia.all_for_select
+      if not @agencias.empty?
+        id = @agencias.first[1]
+        @moviles = Movil.all_for_select(id)
+      else
+        @moviles = Movil.all_for_select
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
