@@ -44,8 +44,12 @@ class Movil < ActiveRecord::Base
 		Propietario.all_for_validate_inclusion
   end
 
-  def self.all_for_select
-    Movil.all.map{|r| [r.nromovil, r.id]}
+  def self.all_for_select(agencia_id = nil)
+    if agencia_id.nil?
+      Movil.all.order(:nromovil).map{|r| [r.nromovil, r.id]}
+    else
+      Movil.where(agencia_id: agencia_id).order(:nromovil).map{|r| [r.nromovil, r.id]}
+    end
   end
 
   def self.all_for_validate_inclusion
