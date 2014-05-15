@@ -236,5 +236,7 @@ es-AR:
         movil: Móvil
         nromovil_desde: Número de móvil
         fecha_movimiento: Fecha
+      cuenta:
+        movil: Móvil
     errors:
       <<: *errors

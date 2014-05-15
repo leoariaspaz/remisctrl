@@ -4,7 +4,11 @@ class CuentasController < ApplicationController
 
   # GET /cuentas
   def index
-    @cuentas = Cuenta.all
+    @cuentas = Cuenta.
+                  joins(:chofer, :movil, :estado_cuenta).
+                  select( "cuentas.*, choferes.apodo AS apodo_chofer, choferes.nombre AS nombre_chofer," + 
+                          "moviles.nromovil, rellenos.descripcion AS descripcion_estado" )
+    # @cuentas = Cuenta.all
   end
 
   # GET /cuentas/1
@@ -73,10 +77,11 @@ class CuentasController < ApplicationController
       else
         @moviles = Movil.all_for_select
       end
+      @estados = EstadoCuenta.all_for_select
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cuenta_params
-      params.require(:cuenta).permit(:chofer_id, :movil_id, :estado, :saldo_anterior)
+      params.require(:cuenta).permit(:chofer_id, :movil_id, :estado_id, :saldo_anterior, :agencia_id)
     end
 end

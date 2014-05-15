@@ -5,6 +5,7 @@ class Relleno < ActiveRecord::Base
 	has_many :propietario_estado, foreign_key: 'estado_id', dependent: :restrict_with_error
 	has_many :movil_estado, foreign_key: 'estado_id', dependent: :restrict_with_error
 	has_many :movil_agencia, foreign_key: 'agencia_id', dependent: :restrict_with_error
+	has_many :cuenta_estado, foreign_key: 'estado_id', dependent: :restrict_with_error	
 
 	validates :descripcion, :sintetico, uniqueness: { scope: [:tipo_relleno_id], 
 		case_sensitive: false }

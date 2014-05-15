@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20140511011221) do
   create_table "cuentas", force: true do |t|
     t.integer  "chofer_id"
     t.integer  "movil_id"
-    t.integer  "estado"
+    t.integer  "estado_id"
     t.decimal  "saldo_anterior", precision: 18, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"

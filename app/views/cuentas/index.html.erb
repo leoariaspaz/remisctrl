@@ -21,9 +21,9 @@
   <tbody>
     <% @cuentas.each do |cuenta| %>
       <tr>
-        <td><%= cuenta.chofer %></td>
-        <td><%= cuenta.movil %></td>
-        <td><%= cuenta.estado %></td>
+        <td><%= "#{cuenta.nombre_chofer} (#{cuenta.apodo_chofer})" %></td>
+        <td><%= cuenta.nromovil %></td>
+        <td><%= cuenta.descripcion_estado %></td>
         <td><%= cuenta.saldo_anterior %></td>
         <td class="action"><%= link_to_edit edit_cuenta_path(cuenta) %></td>
         <td class="action"><%= link_to_delete cuenta %></td>
