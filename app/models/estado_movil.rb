@@ -10,6 +10,6 @@ class EstadoMovil
   end
 
 	def self.all
-		Relleno.joins(:tipo_relleno).where("tipos_relleno.codigo = #{ID_RELLENO}").load
+		Relleno.joins(:tipo_relleno).where("tipos_relleno.codigo = #{ID_RELLENO}").order(:descripcion).load
 	end
 end
