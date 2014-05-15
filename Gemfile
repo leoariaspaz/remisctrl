@@ -46,4 +46,4 @@ end
 
 gem 'carrierwave'
 gem 'prawn_rails'
-gem 'hirb'
+# gem 'hirb'
