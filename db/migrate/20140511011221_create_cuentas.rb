@@ -4,7 +4,7 @@ class CreateCuentas < ActiveRecord::Migration
       t.references :chofer, index: true
       t.references :movil, index: true
       t.integer :estado_id
-      t.decimal :saldo_anterior, precision: 18, scale: 2
+      t.decimal :saldo_anterior, precision: 18, scale: 2, default: 0
 
       t.timestamps
     end
