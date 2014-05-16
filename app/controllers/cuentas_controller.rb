@@ -4,10 +4,7 @@ class CuentasController < ApplicationController
 
   # GET /cuentas
   def index
-    @cuentas = Cuenta.
-                  joins(:chofer, :movil, :estado_cuenta).
-                  select( "cuentas.*, choferes.apodo AS apodo_chofer, choferes.nombre AS nombre_chofer," + 
-                          "moviles.nromovil, rellenos.descripcion AS descripcion_estado" )
+    @cuentas = Cuenta.all_descriptive
     # @cuentas = Cuenta.all
   end
 
@@ -30,7 +27,7 @@ class CuentasController < ApplicationController
 
     respond_to do |format|
       if @cuenta.save
-        format.html { redirect_to cuentas_url, notice: t('scaffold.save_msg', entity: "#{@cuenta}") }
+        format.html { redirect_to cuentas_url, notice: t('scaffold.save_msg', entity: "La cuenta") }
       else
         format.html { render action: 'new' }
       end
@@ -41,7 +38,7 @@ class CuentasController < ApplicationController
   def update
     respond_to do |format|
       if @cuenta.update(cuenta_params)
-        format.html { redirect_to cuentas_url, notice: t('scaffold.update_msg', entity: "#{@cuenta}") }
+        format.html { redirect_to cuentas_url, notice: t('scaffold.update_msg', entity: "La cuenta") }
       else
         format.html { render action: 'edit' }
       end
