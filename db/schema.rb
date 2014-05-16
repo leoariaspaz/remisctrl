@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140511011221) do
+ActiveRecord::Schema.define(version: 20140516171329) do
 
   create_table "choferes", force: true do |t|
     t.string   "nombre"
@@ -109,8 +109,10 @@ ActiveRecord::Schema.define(version: 20140511011221) do
     t.decimal  "importe",          precision: 18, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "cuenta_id"
   end
 
+  add_index "movimientos", ["cuenta_id"], name: "index_movimientos_on_cuenta_id"
   add_index "movimientos", ["transaccion_id"], name: "index_movimientos_on_transaccion_id"
 
   create_table "propietarios", force: true do |t|
