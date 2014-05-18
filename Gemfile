@@ -47,3 +47,4 @@ end
 gem 'carrierwave'
 gem 'prawn_rails'
 # gem 'hirb'
+gem 'will_paginate', '~> 3.0'

@@ -1,0 +1,62 @@
+$verde:           #468966;
+$crema:           #fff0a5;
+$ocre:            #ffb03b;
+$naranja:         #b64926;
+$rojo:            #8e2800;
+$font-stack1-:    verdana, arial, helvetica, sans-serif;
+$font-stack1:     Trebuchet, Tahoma, Arial, sans-serif;
+$font-stack2-:    arial, helvetica, sans-serif;
+$font-stack2:     Futura, 'Century Gothic', AppleGothic, sans-serif;
+$font-stack-body: Garamond, 'Hoefler Text', 'Times New Roman', Times, serif;
+
+.flickr_pagination {
+  text-align: center;
+  cursor: default;
+  padding: .3em;
+}
+
+.flickr_pagination a,.flickr_pagination span,.flickr_pagination em {
+  border: 1px solid $verde;
+  padding: .2em .5em;
+  font-size: 1em;
+}
+
+.flickr_pagination .current {
+  font-style: normal;
+  font-weight: 700;
+  color: $crema;
+  background-color: $verde;
+}
+
+.flickr_pagination a {
+  background-color: #f5f5f5;
+  color: $verde;
+  text-decoration: none;
+}
+
+.flickr_pagination a:hover,.flickr_pagination a:focus {
+  background: $crema;
+}
+
+.flickr_pagination .page_info {
+  color: $naranja;
+  padding-top: .8em;
+}
+
+.flickr_pagination .previous_page,.flickr_pagination .next_page {
+  border-width: 1px;
+}
+
+.flickr_pagination .previous_page {
+  margin-right: 1em;
+}
+
+.flickr_pagination .next_page {
+  margin-left: 1em;
+}
+
+.flickr_pagination .disabled {
+  color: #aaa;
+  background-color: #f5f5f5;
+}
+

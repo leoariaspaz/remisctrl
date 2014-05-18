@@ -21,8 +21,8 @@
 
   <tbody>
     <% @transacciones.each do |transaccion| %>
-      <tr>
-        <th><%= transaccion.id %></th>
+      <tr class="<%= cycle("alt", "") %>">
+        <td class="ac"><%= transaccion.id %></td>
         <td><%= transaccion.descripcion %></td>
         <td><%= transaccion.sintetico %></td>
         <td><%= (transaccion.es_debito)? "Débito":"Crédito" %></td>

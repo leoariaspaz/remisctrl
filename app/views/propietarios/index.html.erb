@@ -21,12 +21,12 @@
 
   <tbody>
     <% @propietarios.each do |propietario| %>
-      <tr>
+      <tr class="<%= cycle("alt", "") %>">
         <td><%= link_to propietario.nombre, propietario %></td>
-        <td><%= propietario.tipo_doc.sintetico %></td>
+        <td><%= propietario.tipo_doc_propietario %></td>
         <td class="ar"><%= propietario.nrodoc %></td>
         <td class="ac"><%= format_date propietario.fecha_alta %></td>
-        <td><%= propietario.estado.descripcion %> desde el <%= format_date propietario.fecha_estado %></td>
+        <td><%= propietario.estado_propietario %> desde el <%= format_date propietario.fecha_estado %></td>
         <td class="action"><%= link_to_edit edit_propietario_path(propietario) %></td>
         <td class="action"><%= link_to_delete propietario %></td>
         <td class="action">
@@ -36,4 +36,8 @@
     <% end %>
   </tbody>
 </table>
+
+<div class="flickr_pagination">
+  <%= will_paginate @propietarios, container: false %>
+</div>
 

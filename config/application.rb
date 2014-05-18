@@ -24,5 +24,8 @@ module Remisctrl
 
     # añado el path de los reportes pdf
     config.autoload_paths += %W(#{config.root}/app/pdfs)
+
+    # 20140517 - will_paginate - tamaño de página por defecto
+    WillPaginate.per_page = 20
   end
 end

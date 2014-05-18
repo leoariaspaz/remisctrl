@@ -28,6 +28,18 @@ class Movil < ActiveRecord::Base
 
   attr_accessor :motivo_cambio_estado
 
+  def self.all_descriptive
+    # all.joins(:estado).includes(:agencia, :propietario, :chofer).order(:nromovil).select("moviles.*, rellenos.descripcion AS estado_movil")
+    all.
+      joins(:estado).
+      joins(%{  LEFT JOIN rellenos AS agencias ON moviles.agencia_id = agencias.id
+                LEFT JOIN propietarios ON moviles.propietario_id = propietarios.id
+                LEFT JOIN choferes ON moviles.chofer_id = choferes.id }).
+      order(:nromovil).
+      select(%{moviles.*, rellenos.descripcion AS estado_movil, agencias.descripcion AS agencia_movil,
+               propietarios.nombre AS propietario_movil, choferes.nombre AS chofer_movil })
+  end
+
 	def estados_validos
 		EstadoMovil.all_for_validate_inclusion		
   end

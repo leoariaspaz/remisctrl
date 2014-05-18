@@ -16,8 +16,8 @@ class Cuenta < ActiveRecord::Base
   def self.all_descriptive
     Cuenta.
       joins(:chofer, :movil, :estado_cuenta).
-      select( "cuentas.*, choferes.apodo AS apodoChofer, choferes.nombre AS nombreChofer," + 
-              "moviles.nromovil, rellenos.descripcion AS estado" )
+      select(%{cuentas.*, choferes.apodo AS apodoChofer, choferes.nombre AS nombreChofer,
+               moviles.nromovil, rellenos.descripcion AS estado} )
   end
 
   def agencia_id

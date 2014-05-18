@@ -60,15 +60,15 @@
 
   <tbody>
     <% @moviles.each do |movil| %>
-      <tr>
+      <tr class="<%= cycle("alt", "") %>">
         <td class="ac"><%= link_to movil.nromovil, movil %></td>
         <td><%= movil.marca %></td>
         <td class="ac"><%= movil.modelo %></td>
         <td class="ac"><%= movil.dominio %></td>
-        <td><%= movil.estado.descripcion %> desde <%= format_date movil.fecha_estado %></td>
-        <td><%= movil.agencia.descripcion unless movil.agencia.nil? %></td>
-        <td><%= movil.propietario.nombre unless movil.propietario.nil? %></td>
-        <td><%= movil.chofer.nombre unless movil.chofer.nil? %></td>
+        <td><%= movil.estado_movil %> desde <%= format_date movil.fecha_estado %></td>
+        <td><%= movil.agencia_movil %></td>
+        <td><%= movil.propietario_movil %></td>
+        <td><%= movil.chofer_movil %></td>
         <td class="action"><%= link_to_edit edit_movil_path(movil) %></td>
         <td class="action"><%= link_to_delete movil %></td>
         <td class="action print">
@@ -78,6 +78,10 @@
     <% end %>
   </tbody>
 </table>
+
+<div class="flickr_pagination">
+  <%= will_paginate @moviles, container: false %>
+</div>
 
 <div class="jqmWindow" id="dialog">
   <div class="content">

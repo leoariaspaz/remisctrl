@@ -4,7 +4,7 @@ class CuentasController < ApplicationController
 
   # GET /cuentas
   def index
-    @cuentas = Cuenta.all_descriptive
+    @cuentas = Cuenta.all_descriptive.paginate(page: params[:page])
     # @cuentas = Cuenta.all
   end
 

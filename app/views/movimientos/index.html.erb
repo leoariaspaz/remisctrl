@@ -23,7 +23,7 @@
 
   <tbody>
     <% @movimientos.each do |movimiento| %>
-      <tr>
+      <tr class="<%= cycle("alt", "") %>">
         <td class="ac"><%= movimiento.fecha_movimiento.strftime('%d/%m/%Y') %></td>
         <td class="ar"><%= movimiento.movil.nromovil %></td>
         <td><%= movimiento.chofer.nombre %></td>

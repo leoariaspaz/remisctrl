@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20140516171329) do
     t.integer  "chofer_id"
     t.integer  "movil_id"
     t.integer  "estado_id"
-    t.decimal  "saldo_anterior", precision: 18, scale: 2, default: 0.0
+    t.decimal  "saldo_anterior", precision: 18, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end

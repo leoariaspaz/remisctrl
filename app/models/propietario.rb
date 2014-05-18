@@ -19,6 +19,13 @@ class Propietario < ActiveRecord::Base
   validates :motivo_cambio_estado, presence: true, if: :estado_id_changed?, on: :update  
   
   attr_accessor :motivo_cambio_estado
+
+  def self.all_descriptive
+    Propietario.
+      joins(:tipo_doc, :estado).
+      select(%{ propietarios.*, rellenos.sintetico AS tipo_doc_propietario, 
+                 estados_propietarios.descripcion AS estado_propietario })
+  end
   
 	def estados_validos
 		EstadoPropietario.all_for_validate_inclusion

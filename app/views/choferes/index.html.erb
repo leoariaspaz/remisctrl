@@ -23,7 +23,7 @@
       <tr class="<%= cycle("alt", "") %>">
         <td><%= link_to chofer.nombre, chofer %></td>
         <td><%= chofer.apodo %></td>
-        <td><%= chofer.estado.descripcion%> desde el <%= format_date chofer.fechaestado%></td>
+        <td><%= chofer.estado_chofer %> desde el <%= format_date chofer.fechaestado%></td>
         <td class="action"><%= link_to_edit edit_chofer_path(chofer) %></td>
         <td class="action"><%= link_to_delete chofer %></td>
         <td class="action">
@@ -34,3 +34,6 @@
   </tbody>
 </table>
 
+<div class="flickr_pagination">
+  <%= will_paginate @choferes, container: false %>
+</div>

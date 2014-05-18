@@ -14,6 +14,10 @@ class Chofer < ActiveRecord::Base
   validates :motivo_cambio_estado, presence: true, if: :estado_id_changed?, on: :update
 
   attr_accessor :motivo_cambio_estado
+
+  def self.all_descriptive
+    all.joins(:estado).select(%{choferes.*, rellenos.descripcion AS estado_chofer})
+  end
   
 	def estados_validos
 		EstadoChofer.all_for_validate_inclusion

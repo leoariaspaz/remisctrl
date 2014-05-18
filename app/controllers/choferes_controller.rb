@@ -3,7 +3,7 @@ class ChoferesController < ApplicationController
 
   # GET /choferes
   def index
-    @choferes = Chofer.includes(:estado)
+    @choferes = Chofer.all_descriptive.paginate(page: params[:page])
   end
 
   # GET /choferes/new

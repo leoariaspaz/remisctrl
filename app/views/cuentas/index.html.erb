@@ -20,7 +20,7 @@
 
   <tbody>
     <% @cuentas.each do |cuenta| %>
-      <tr>
+      <tr class="<%= cycle("alt", "") %>">
         <td><%= cuenta.nombre_chofer %></td>
         <td class="ar"><%= cuenta.nromovil %></td>
         <td><%= cuenta.estado %></td>
@@ -31,3 +31,7 @@
     <% end %>
   </tbody>
 </table>
+
+<div class="flickr_pagination">
+  <%= will_paginate @cuentas, container: false %>
+</div>

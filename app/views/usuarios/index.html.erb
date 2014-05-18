@@ -16,14 +16,14 @@
 
   <tbody>
     <% @usuarios.each do |usuario| %>
-      <tr>
+      <tr class="<%= cycle("alt", "") %>">
         <td><%= usuario.nombre.titleize %></td>
-        <td><%= link_to 'Resetear contraseña', 
+        <td><%= link_to 'Restablecer contraseña', 
         								url_for(action: "reset_password", id: usuario), 
         								method: :patch, 
         								data: { confirm: "¿Está seguro que desea cambiar la " +
         									  "contraseña del usuario #{usuario.nombre.titleize}?" } %></td>
-        <td><%= link_to_delete usuario %></td>
+        <td class="ac"><%= link_to_delete usuario %></td>
       </tr>
     <% end %>
   </tbody>

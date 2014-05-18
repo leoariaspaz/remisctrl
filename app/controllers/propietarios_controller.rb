@@ -5,7 +5,7 @@ class PropietariosController < ApplicationController
   # GET /propietarios
   # GET /propietarios.json
   def index
-    @propietarios = Propietario.includes(:tipo_doc, :estado)
+    @propietarios = Propietario.all_descriptive.paginate(page: params[:page])
   end
 
   # GET /propietarios/new

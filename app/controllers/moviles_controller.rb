@@ -4,7 +4,7 @@ class MovilesController < ApplicationController
 
   # GET /moviles
   def index
-    @moviles = Movil.all.order(:nromovil)
+    @moviles = Movil.all_descriptive.paginate(page: params[:page])
   end
 
   # GET /moviles/1
