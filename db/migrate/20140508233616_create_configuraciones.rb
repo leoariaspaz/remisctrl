@@ -5,7 +5,5 @@ class CreateConfiguraciones < ActiveRecord::Migration
 
       t.timestamps
     end
-
-    Configuracion.create(fecha_proceso: Date.today)
   end
 end
