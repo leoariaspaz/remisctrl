@@ -7,12 +7,6 @@ class MovilesController < ApplicationController
     @moviles = Movil.all_descriptive.paginate(page: params[:page])
   end
 
-  # GET /moviles/1
-  def show
-    @documento = Documento.new
-    @tipos_imagen = TipoImagen.all_for_select
-  end
-
   # GET /moviles/new
   def new
     @movil = Movil.new
