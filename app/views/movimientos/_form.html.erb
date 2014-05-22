@@ -6,6 +6,10 @@
     <%= f.date_select :fecha_movimiento %>
   </div>
   <div class="field">
+    <%= f.label :cuenta %><br>
+    <%= f.select :cuenta_id, @cuentas, prompt: t('helpers.select.prompt') %>
+  </div>
+  <div class="field">
     <%= f.label :transaccion %><br>
     <%= f.select :transaccion_id, @transacciones, prompt: t('helpers.select.prompt') %>
   </div>
@@ -17,14 +21,5 @@
     <%= f.label :importe %><br>
     <%= f.text_field :importe %>
   </div>  
-  <div class="field">
-    <%= f.label :movil %><br>
-    <%= f.select :agencia_id, @agencias, prompt: t('helpers.select.prompt') %>
-    <%= f.select :movil_id, @moviles, prompt: t('helpers.select.prompt') %>
-  </div>
-  <div class="field">
-    <%= f.label :chofer %><br>
-    <%= f.select :chofer_id, @choferes, prompt: t('helpers.select.prompt') %>
-  </div>
   <%= form_actions(movimientos_path) %>
 <% end %>

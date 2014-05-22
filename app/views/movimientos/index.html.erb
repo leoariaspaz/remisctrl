@@ -11,8 +11,7 @@
   <thead>
     <tr>
       <th>Fecha</th>
-      <th>Móvil</th>
-      <th>Chofer</th>      
+      <th>Cuenta</th>
       <th>Transacción</th>
       <th>Observación</th>
       <th>Importe</th>
@@ -25,8 +24,7 @@
     <% @movimientos.each do |movimiento| %>
       <tr class="<%= cycle("alt", "") %>">
         <td class="ac"><%= movimiento.fecha_movimiento.strftime('%d/%m/%Y') %></td>
-        <td class="ar"><%= movimiento.movil.nromovil %></td>
-        <td><%= movimiento.chofer.nombre %></td>
+        <td class="ar"><%= movimiento.cuenta %></td>
         <td><%= movimiento.transaccion.descripcion %></td>
         <td><%= movimiento.observacion %></td>
         <td class="ar"><%= number_to_currency movimiento.importe %></td>

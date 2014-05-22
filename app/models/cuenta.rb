@@ -41,6 +41,19 @@ class Cuenta < ActiveRecord::Base
     true
   end
 
+  def self.all_for_select
+    all.
+      joins(:estado_cuenta).
+      where("rellenos.codigo <> 2").
+      select('cuentas.*').
+      order(:id).
+      collect { |c| [c.id, c.id] }
+  end
+
+  def self.all_for_validate_inclusion
+    all_for_select.collect { |c| c[0] }
+  end
+
 private
 	def choferes_validos
 		Chofer.all_for_validate_inclusion
