@@ -380,53 +380,36 @@ a.action {
 
 #logs_estados {
 	.pagination {
-	  text-align: center;
+	  text-align: right;
 	  cursor: default;
-	  padding: .3em;
+	  padding: 0 !important;
 	}
 
 	.pagination a,.pagination span,.pagination em {
 	  border: 1px solid $verde;
-	  padding: .2em .5em;
 	  font-size: 1em;
-	}
-
-	.pagination .current {
-	  font-style: normal;
-	  font-weight: 700;
-	  color: $crema;
-	  background-color: $verde;
+	  line-height: 1.5em;
 	}
 
 	.pagination a {
-	  background-color: #f5f5f5;
+	  background-color: $crema;
 	  color: $verde;
+	  font-weight: bold;
+	  padding: 0 0.5em;
 	  text-decoration: none;
+	  margin: 0 !important;
 	}
 
 	.pagination a:hover,.pagination a:focus {
-	  background: $crema;
-	}
-
-	.pagination .page_info {
-	  color: $naranja;
-	  padding-top: .8em;
+	  background-color: $verde;
+	  color: $crema;
 	}
 
 	.pagination .previous_page,.pagination .next_page {
 	  border-width: 1px;
 	}
 
-	.pagination .previous_page {
-	  margin-right: 1em;
-	}
-
-	.pagination .next_page {
-	  margin-left: 1em;
-	}
-
 	.pagination .disabled {
-	  color: #aaa;
-	  background-color: #f5f5f5;
+	  display: none;
 	}
 }
