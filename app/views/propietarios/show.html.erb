@@ -1,5 +1,20 @@
 <%= set_title "Datos del propietario" %>
 
+<% content_for :scripts do %>
+	<script type="text/javascript" data-turbolinks-track="true">
+	  $(document).on('ready page:load', function(event) {
+			$(document).on('click', '.pagination a', function (e) {
+			    e.preventDefault();
+			    var container = $(this).closest('#logs_estados');
+			    $.get($(this).attr('href'), function(data) {
+				    container.html($(data).html());
+			    });
+			});
+	  });      
+
+	</script>
+<% end %>
+
 <div id="details">
 	<p>
 		<strong>Nombre:</strong>
@@ -22,5 +37,6 @@
 	</p>
 </div>
 
-<%= render 'logs_estado/list', logs: @propietario.logs_estado %>
+<%= render 'logs_estado/list', logs: @propietario.logs.paginate(page: 1, per_page: 5), 
+								model_name: 'propietarios' %>
 <%= render 'documentos/list', documentable: @propietario %>

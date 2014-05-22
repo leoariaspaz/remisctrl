@@ -42,5 +42,5 @@
 	</p>
 </div>
 
-<%= render 'logs_estado/list', logs: @chofer.logs_estado %>
+<%= render 'logs_estado/list', logs: @chofer.logs.paginate(page: 1, per_page: 5), model_name: 'choferes' %>
 <%= render 'documentos/list', documentable: @chofer %>

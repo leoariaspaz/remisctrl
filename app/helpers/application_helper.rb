@@ -80,7 +80,7 @@ module ApplicationHelper
 	def link_to_edit(path)
   	link_to path do
 			image_tag "pencil.png", alt: "editar", title: "editar"
-    end	
+    end
 	end
 
 	def link_to_delete(path)
@@ -94,5 +94,10 @@ module ApplicationHelper
 		link_to url_for(url_for_options) do
     	image_tag "printer.png", img_options
     end
+	end
+
+	def logs_estado_pagination(logs_estado, model_name)
+		will_paginate logs_estado, page_links: false, params: { controller: 'logs_estado', action: 'index',
+				model_name: model_name }
 	end
 end

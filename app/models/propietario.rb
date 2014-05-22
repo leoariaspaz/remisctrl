@@ -20,6 +20,12 @@ class Propietario < ActiveRecord::Base
   
   attr_accessor :motivo_cambio_estado
 
+  def logs
+    logs_estado.joins(:estado).
+      select("logs_estado.*, rellenos.descripcion AS estado_log").
+      order(created_at: :desc)
+  end
+
   def self.all_descriptive
     Propietario.
       joins(:tipo_doc, :estado).

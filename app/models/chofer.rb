@@ -18,6 +18,12 @@ class Chofer < ActiveRecord::Base
   def self.all_descriptive
     all.joins(:estado).select(%{choferes.*, rellenos.descripcion AS estado_chofer})
   end
+
+  def logs
+    logs_estado.joins(:estado).
+      select("logs_estado.*, rellenos.descripcion AS estado_log").
+      order(created_at: :desc)
+  end
   
 	def estados_validos
 		EstadoChofer.all_for_validate_inclusion

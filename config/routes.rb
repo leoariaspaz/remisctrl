@@ -1,4 +1,8 @@
 Remisctrl::Application.routes.draw do
+  controller :logs_estado do
+    get ':model_name/:id/page/:page' => :index
+  end
+
   resources :cuentas do
     member do
       get 'getmovilbyagencia' => 'cuentas#getmovilbyagencia'
@@ -7,8 +11,10 @@ Remisctrl::Application.routes.draw do
 
   resources :configuraciones, only: [:edit, :update]
 
-  get 'movimientos/consultar'
-  get 'movimientos/consultar_agrupado'
+  controller :movimientos do
+    get 'consultar'
+    get 'consultar_agrupado'
+  end
   resources :movimientos
   
   resources :transacciones
