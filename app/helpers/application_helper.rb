@@ -83,9 +83,9 @@ module ApplicationHelper
     end
 	end
 
-	def link_to_delete(path)
-  	link_to path, method: :delete, data: { confirm: t('helpers.destroy.confirm') } do
-			image_tag "trash.png", alt: "eliminar", title: "eliminar"
+	def link_to_delete(path, title = 'eliminar', msg = t('helpers.destroy.confirm'))
+  	link_to path, method: :delete, data: { confirm: msg } do
+			image_tag "trash.png", alt: 'eliminar', title: title
     end	
 	end
 

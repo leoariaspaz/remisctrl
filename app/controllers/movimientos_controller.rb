@@ -4,7 +4,7 @@ class MovimientosController < ApplicationController
 
   # GET /movimientos
   def index
-    @movimientos = Movimiento.all.order("fecha_movimiento DESC, created_at DESC")
+    @movimientos = Movimiento.all_descriptive
   end
 
   # GET /movimientos/1

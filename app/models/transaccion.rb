@@ -1,6 +1,10 @@
 class Transaccion < ActiveRecord::Base
-	before_save :set_es_debito
 	TipoTransaccion = {credito: "Crédito", debito: "Débito"}
+
+	before_save :set_es_debito
+
+	has_many :movimiento
+
 	attr_accessor :tipo
 
 	validates :descripcion, :sintetico, presence: true

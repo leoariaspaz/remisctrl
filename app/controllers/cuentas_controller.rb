@@ -27,7 +27,7 @@ class CuentasController < ApplicationController
 
     respond_to do |format|
       if @cuenta.save
-        format.html { redirect_to cuentas_url, notice: t('scaffold.save_msg', entity: "La cuenta") }
+        format.html { redirect_to cuentas_url, notice: t('scaffold.save_msg', entity: "La cuenta #{@cuenta.id}") }
       else
         format.html { render action: 'new' }
       end
@@ -38,7 +38,7 @@ class CuentasController < ApplicationController
   def update
     respond_to do |format|
       if @cuenta.update(cuenta_params)
-        format.html { redirect_to cuentas_url, notice: t('scaffold.update_msg', entity: "La cuenta") }
+        format.html { redirect_to cuentas_url, notice: t('scaffold.update_msg', entity: "de la cuenta #{@cuenta.id}") }
       else
         format.html { render action: 'edit' }
       end
@@ -47,9 +47,10 @@ class CuentasController < ApplicationController
 
   # DELETE /cuentas/1
   def destroy
-    @cuenta.destroy
+    e = EstadoCuenta.all.where(codigo: 3).first
+    @cuenta.update(estado_id: e.id)
     respond_to do |format|
-      format.html { redirect_to cuentas_url }
+      format.html { redirect_to cuentas_url, notice: "Se dio de baja la cuenta #{@cuenta.id}" }
     end
   end
 
@@ -79,6 +80,6 @@ class CuentasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cuenta_params
-      params.require(:cuenta).permit(:chofer_id, :movil_id, :estado_id, :saldo_anterior, :agencia_id)
+      params.require(:cuenta).permit(:chofer_id, :movil_id, :saldo_anterior, :agencia_id)
     end
 end

@@ -44,8 +44,8 @@ Relleno.create(codigo: 3, descripcion: "Carnet de conducir", sintetico: "CARNET"
 
 puts "Estado de cuenta"
 estcta		= TipoRelleno.create(codigo: 7, descripcion: "Estado de cuenta")
-Relleno.create(codigo: 1, descripcion: "Activo", sintetico: "A", habilitado: "t", tipo_relleno_id: estcta.id)
-Relleno.create(codigo: 2, descripcion: "Inactivo", sintetico: "I", habilitado: "t", tipo_relleno_id: estcta.id)
+Relleno.create(codigo: 1, descripcion: "Nueva", sintetico: "N", habilitado: "t", tipo_relleno_id: estcta.id)
+Relleno.create(codigo: 2, descripcion: "Activa", sintetico: "A", habilitado: "t", tipo_relleno_id: estcta.id)
 Relleno.create(codigo: 3, descripcion: "Baja", sintetico: "B", habilitado: "t", tipo_relleno_id: estcta.id)
 
 puts "Configurando fecha de proceso"

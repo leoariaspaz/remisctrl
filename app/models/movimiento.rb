@@ -11,16 +11,20 @@ class Movimiento < ActiveRecord::Base
   validates :importe, numericality: {only_integer: false, greater_than_or_equal_to: 0}, allow_nil: false
   validates :cuenta_id, inclusion: { in: :cuentas_validas, message: 'no es una cuenta correcta' }
 
-	def choferes_validos
-		Chofer.all_for_validate_inclusion
-  end
-
-	def moviles_validos
-		Chofer.all_for_validate_inclusion
+  def self.all_descriptive
+    logger.debug 'all_descriptive'
+    Movimiento.
+      joins(:transaccion, :cuenta).
+      select(%{movimientos.*, cuentas.id AS cuenta_movimiento, transacciones.descripcion AS transaccion_movimiento}).
+      order(%{movimientos.fecha_movimiento DESC, movimientos.created_at DESC})
   end
 
   def cuentas_validas
     Cuenta.all_for_validate_inclusion
+  end
+
+  def nro_cuenta
+    "%07d" % cuenta_movimiento
   end
 
 protected

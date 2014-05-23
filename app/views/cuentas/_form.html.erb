@@ -48,12 +48,6 @@
     <%= f.label :movil %><br/>
     <%= f.select :movil_id, @moviles, prompt: t('helpers.select.prompt') %>
   </div>
-  <% if not @cuenta.id.nil? %>
-  <div class="field">
-    <%= f.label :estado_id %><br/>
-    <%= f.select :estado_id, @estados, prompt: t('helpers.select.prompt') %>
-  </div>
-  <% end %>
   <div class="field">
     <%= f.label :saldo_anterior %><br/>
     <%= f.text_field :saldo_anterior %>

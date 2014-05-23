@@ -9,6 +9,7 @@
 <table class="data">
   <thead>
     <tr>
+      <th>Cuenta</th>
       <th>Chofer</th>
       <th>Movil</th>
       <th>Estado</th>
@@ -21,12 +22,14 @@
   <tbody>
     <% @cuentas.each do |cuenta| %>
       <tr class="<%= cycle("alt", "") %>">
+        <td><%= cuenta.id %></td>
         <td><%= cuenta.nombre_chofer %></td>
         <td class="ar"><%= cuenta.nromovil %></td>
         <td><%= cuenta.estado %></td>
         <td class="ar"><%= number_to_currency cuenta.saldo_anterior %></td>
         <td class="action"><%= link_to_edit edit_cuenta_path(cuenta) %></td>
-        <td class="action"><%= link_to_delete cuenta %></td>
+        <td class="action"><%= link_to_delete cuenta, 'dar de baja', 
+                  "¿Está seguro que desea dar de baja esta cuenta?" %></td>
       </tr>
     <% end %>
   </tbody>
