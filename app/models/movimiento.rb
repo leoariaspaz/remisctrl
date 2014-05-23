@@ -4,6 +4,7 @@ class Movimiento < ActiveRecord::Base
 
   belongs_to :transaccion
   belongs_to :cuenta
+  delegate   :movil, to: :cuenta
 
   attr_accessor :agencia_id
 
@@ -12,19 +13,28 @@ class Movimiento < ActiveRecord::Base
   validates :cuenta_id, inclusion: { in: :cuentas_validas, message: 'no es una cuenta correcta' }
 
   def self.all_descriptive
-    logger.debug 'all_descriptive'
-    Movimiento.
-      joins(:transaccion, :cuenta).
-      select(%{movimientos.*, cuentas.id AS cuenta_movimiento, transacciones.descripcion AS transaccion_movimiento}).
-      order(%{movimientos.fecha_movimiento DESC, movimientos.created_at DESC})
+    joins(:transaccion, :cuenta).
+      joins(%{INNER JOIN moviles m ON m.id = cuentas.movil_id 
+              INNER JOIN choferes c ON c.id = cuentas.chofer_id}).
+      order(%{movimientos.fecha_movimiento DESC, movimientos.created_at DESC}).
+      select(%{movimientos.*, transacciones.descripcion AS transaccion_movimiento, 
+               m.nromovil, c.apodo AS apodo_chofer, c.nombre AS nombre_chofer})
   end
+
+  def nombre_cuenta
+    nombre = nombre_chofer
+    if not apodo_chofer.blank? 
+      nombre += " (#{apodo_chofer})"
+    end
+    nombre
+  end  
 
   def cuentas_validas
     Cuenta.all_for_validate_inclusion
   end
 
   def nro_cuenta
-    "%07d" % cuenta_movimiento
+    "%07d" % cuenta_id
   end
 
   def importe_contrasentado

@@ -11,7 +11,7 @@
   <thead>
     <tr>
       <th>Fecha</th>
-      <th>Cuenta</th>
+      <th colspan="3">Cuenta</th>
       <th>Transacción</th>
       <th>Observación</th>
       <th>Importe</th>
@@ -24,7 +24,9 @@
     <% @movimientos.each do |movimiento| %>
       <tr class="<%= cycle("alt", "") %>">
         <td class="ac"><%= movimiento.fecha_movimiento.strftime('%d/%m/%Y') %></td>
-        <td class="ac"><%= movimiento.nro_cuenta %></td>
+        <td class="ac ctadetail"><%= movimiento.nro_cuenta %></td>
+        <td class="ctadetail">Móvil <%= movimiento.nromovil %></td>
+        <td class="ctadetail"><%= movimiento.nombre_cuenta %></td>
         <td><%= movimiento.transaccion_movimiento %></td>
         <td><%= movimiento.observacion %></td>
         <td class="ar"><%= number_to_currency movimiento.importe_contrasentado %></td>

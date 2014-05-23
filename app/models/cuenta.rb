@@ -37,7 +37,6 @@ class Cuenta < ActiveRecord::Base
   def set_estado
     ec = EstadoCuenta.all.where(descripcion: "Nueva").first
     self.estado_id = ec.id
-    logger.debug "estado_id = #{self.estado_id}"
     true
   end
 

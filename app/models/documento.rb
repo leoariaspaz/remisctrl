@@ -16,7 +16,6 @@ private
   end
   
 	def estados_validos
-		#logger.debug "#{estado_id} - #{EstadoMovil.all_for_validate_inclusion}"
 		TipoImagen.all_for_validate_inclusion
   end  
 end
