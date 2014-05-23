@@ -4,7 +4,7 @@ class MovimientosController < ApplicationController
 
   # GET /movimientos
   def index
-    @movimientos = Movimiento.all_descriptive
+    @movimientos = Movimiento.all_descriptive.paginate(page: params[:page])
   end
 
   # GET /movimientos/1
@@ -45,10 +45,15 @@ class MovimientosController < ApplicationController
   end
 
   # DELETE /movimientos/1
-  def destroy
-    @movimiento.destroy
+  def destroy    
+    begin
+      @movimiento.update(es_contrasiento: true, fecha_contrasiento: DateTime.now)
+      flash[:notice] = 'El movimiento se contrasentó correctamente'
+    rescue Exception => e
+      flash[:notice] = "Error: #{e.message}"
+    end
     respond_to do |format|
-      format.html { redirect_to movimientos_url }
+      format.html { redirect_to movimientos_url}
     end
   end
 

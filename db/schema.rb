@@ -106,11 +106,12 @@ ActiveRecord::Schema.define(version: 20140522163546) do
     t.date     "fecha_movimiento"
     t.date     "fecha_proceso"
     t.string   "observacion"
-    t.decimal  "importe",          precision: 18, scale: 2
+    t.decimal  "importe",            precision: 18, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "cuenta_id"
-    t.boolean  "es_contrasiento"
+    t.boolean  "es_contrasiento",                             default: false
+    t.datetime "fecha_contrasiento"
   end
 
   add_index "movimientos", ["cuenta_id"], name: "index_movimientos_on_cuenta_id"

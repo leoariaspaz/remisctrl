@@ -27,6 +27,10 @@ class Movimiento < ActiveRecord::Base
     "%07d" % cuenta_movimiento
   end
 
+  def importe_contrasentado
+    ((es_contrasiento)? -1 : 1) * importe
+  end
+
 protected
   def set_fecha_proceso
     fecha_proceso = Configuracion.current.fecha_proceso

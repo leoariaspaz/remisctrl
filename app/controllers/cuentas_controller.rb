@@ -48,9 +48,14 @@ class CuentasController < ApplicationController
   # DELETE /cuentas/1
   def destroy
     e = EstadoCuenta.all.where(codigo: 3).first
-    @cuenta.update(estado_id: e.id)
+    begin
+      @cuenta.update(estado_id: e.id)
+      flash[:notice] = "La cuenta #{cuenta.id} se dio de baja correctamente"
+    rescue Exception => ex
+      flash[:notice] = "Error: #{ex.message}"
+    end
     respond_to do |format|
-      format.html { redirect_to cuentas_url, notice: "Se dio de baja la cuenta #{@cuenta.id}" }
+      format.html { redirect_to cuentas_url }
     end
   end
 

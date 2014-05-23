@@ -27,10 +27,15 @@
         <td class="ac"><%= movimiento.nro_cuenta %></td>
         <td><%= movimiento.transaccion_movimiento %></td>
         <td><%= movimiento.observacion %></td>
-        <td class="ar"><%= number_to_currency movimiento.importe %></td>
+        <td class="ar"><%= number_to_currency movimiento.importe_contrasentado %></td>
         <td class="action"><%= link_to_edit edit_movimiento_path(movimiento) %></td>
-        <td class="action"><%= link_to_delete movimiento %></td>
+        <td class="action"><%= link_to_delete movimiento, 'contrasentar', 
+                                  '¿Está seguro que desea contrasentar este movimiento?' %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<div class="flickr_pagination">
+  <%= will_paginate @cuentas, container: false %>
+</div>
