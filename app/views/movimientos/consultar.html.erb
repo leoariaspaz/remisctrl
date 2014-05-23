@@ -26,5 +26,9 @@
     <%= f.number_field :nromovil_desde, class: 'ar' %> al 
     <%= f.number_field :nromovil_hasta, class: 'ar' %>
   </div>
+  <div class="field">
+    <%= f.check_box :mostrar_contrasientos %>
+    <%= f.label :mostrar_contrasientos %>
+  </div>
   <%= search_actions(movimientos_path) %>
 <% end %>

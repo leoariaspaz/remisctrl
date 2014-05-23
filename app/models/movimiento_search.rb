@@ -6,6 +6,7 @@ class MovimientoSearch
 									por_transaccion: "Transacción" }
 
 	attr_accessor :tipo_informe, :fecha_desde, :fecha_hasta, :nromovil_desde, :nromovil_hasta
+	attr_accessor :mostrar_contrasientos
 
 	validates :tipo_informe, :fecha_desde, :fecha_hasta, :nromovil_desde, :nromovil_hasta, presence: true
 	validates :tipo_informe, inclusion: { in: lambda {|tipo| TipoInforme.map{|k,v| k.to_s}},
@@ -25,6 +26,7 @@ class MovimientoSearch
 	    @fecha_hasta = date_from_select_params(params, "fecha_hasta")
 	    @nromovil_desde = params[:nromovil_desde]
 	    @nromovil_hasta = params[:nromovil_hasta]
+	    @mostrar_contrasientos = params[:mostrar_contrasientos]
 		end
 	end
 

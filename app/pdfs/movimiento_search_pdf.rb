@@ -23,7 +23,9 @@ class MovimientoSearchPdf < Prawn::Document
 private
   def body(movimiento_search)
     movimientos = Movimiento.
-                    joins(:transaccion, :chofer, :movil).
+                    joins(:transaccion, :cuenta).
+                    joins(%{INNER JOIN moviles ON moviles.id = cuentas.movil_id 
+                            INNER JOIN choferes ON choferes.id = cuentas.chofer_id}).                    
                     select(%{ movimientos.id AS movimiento_id, 
                               movimientos.updated_at, 
                               movimientos.fecha_movimiento, 
@@ -45,6 +47,9 @@ private
                     order(%{  moviles.nromovil ASC,
                               movimientos.fecha_movimiento ASC, 
                               movimientos.updated_at ASC })
+    if not movimiento_search.mostrar_contrasientos
+      movimientos = movimientos.where(['movimientos.es_contrasiento = ?', false])
+    end
     if movimientos.empty?
       text "- No se han encontrado movimientos para su consulta -", align: :center
     else
@@ -65,13 +70,6 @@ private
         if not m.observacion.empty?
           transaccion += " - " + m.observacion
         end
-        data += [[m.updated_at.strftime('%d/%m/%Y %T'),
-                  m.fecha_movimiento.strftime('%d/%m/%Y'),
-                  m.id_transaccion,
-                  transaccion,
-                  number_to_currency(credito),
-                  number_to_currency(debito),
-                  number_to_currency(saldo)]]
         if nromovil != m.nromovil || chofer != m.nombre_chofer
           print_details(nromovil, chofer, data) if nromovil > 0 and not chofer.empty?
           nromovil = m.nromovil
@@ -79,6 +77,13 @@ private
           saldo = 0
           data = []
         end
+        data += [[m.updated_at.strftime('%d/%m/%Y %T'),
+                  m.fecha_movimiento.strftime('%d/%m/%Y'),
+                  m.id_transaccion,
+                  transaccion,
+                  number_to_currency(credito),
+                  number_to_currency(debito),
+                  number_to_currency(saldo)]]
       end
       m = movimientos.last
       print_details(m.nromovil, m.nombre_chofer, data)
