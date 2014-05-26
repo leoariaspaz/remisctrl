@@ -86,3 +86,7 @@ $font-stack-body: 	Garamond, 'Hoefler Text', 'Times New Roman', Times, serif;
     display: inline-block;
     min-width: 100px;
 }
+
+table.data tr td.contrasiento {
+    text-decoration: line-through !important;
+}

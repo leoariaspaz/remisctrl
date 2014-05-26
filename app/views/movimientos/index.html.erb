@@ -29,7 +29,7 @@
         <td class="ctadetail"><%= movimiento.nombre_cuenta %></td>
         <td><%= movimiento.transaccion_movimiento %></td>
         <td><%= movimiento.observacion %></td>
-        <td class="ar"><%= number_to_currency movimiento.importe_contrasentado %></td>
+        <%= td_importe movimiento %>
         <td class="action"><%= link_to_edit edit_movimiento_path(movimiento) %></td>
         <td class="action"><%= link_to_delete movimiento, 'contrasentar', 
                                   '¿Está seguro que desea contrasentar este movimiento?' %></td>

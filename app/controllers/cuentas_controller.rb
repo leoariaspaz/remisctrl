@@ -65,6 +65,11 @@ class CuentasController < ApplicationController
     render json: @moviles
   end
 
+  def owner
+    params.permit(:id)
+    render partial: 'details_owner', locals: {owner: Cuenta.find(params[:id])}
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cuenta

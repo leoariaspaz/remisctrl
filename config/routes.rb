@@ -6,6 +6,7 @@ Remisctrl::Application.routes.draw do
   resources :cuentas do
     member do
       get 'getmovilbyagencia' => 'cuentas#getmovilbyagencia'
+      get 'owner' => 'cuentas#owner'
     end
   end
 

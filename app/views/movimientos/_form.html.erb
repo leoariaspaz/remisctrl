@@ -1,3 +1,21 @@
+<%= content_for :scripts do %>
+  <script type="text/javascript" data-turbolinks-track="true">
+    $(document).ready(function () {
+      var onDone = function (text) {
+        $('#cuenta_detail').html(text).show();
+      }
+      var onChangeCuenta = function () {
+        if ($(this).val() === '') {
+          $('#cuenta_detail').hide();
+          return false;
+        };
+        $.get('/cuentas/' + $(this).val() + '/owner').done(onDone);
+      }
+      $('#movimiento_cuenta_id').change(onChangeCuenta);
+    });
+  </script>
+<% end %>
+
 <%= form_for(@movimiento) do |f| %>
   <%= render_error @movimiento, 'El movimiento' %>
 
@@ -8,6 +26,7 @@
   <div class="field">
     <%= f.label :cuenta %><br>
     <%= f.select :cuenta_id, @cuentas, prompt: t('helpers.select.prompt') %>
+    <div id="cuenta_detail" class="details" style="display: none;"></div>
   </div>
   <div class="field">
     <%= f.label :transaccion %><br>
