@@ -20,6 +20,7 @@ class MovimientoSearch
 			@fecha_hasta = Configuracion.current.fecha_proceso
 			@nromovil_desde = Movil.minimum(:nromovil)
 			@nromovil_hasta = Movil.maximum(:nromovil)
+			@mostrar_contrasientos = false
 		else
 	    @tipo_informe = params[:tipo_informe]
 	    @fecha_desde = date_from_select_params(params, "fecha_desde")

@@ -65,7 +65,7 @@ class MovimientosController < ApplicationController
   # GET /movimientos/consultar_por_criterio
   def consultar_agrupado
     search = params.require(:search).permit(:tipo_informe, :fecha_desde, :fecha_hasta, 
-                :nromovil_desde, :nromovil_hasta)
+                :nromovil_desde, :nromovil_hasta, :mostrar_contrasientos)
     @movimientos_search = MovimientoSearch.new(search)
     if @movimientos_search.valid?
       pdf = MovimientoSearchPdf.new(@movimientos_search, view_context)

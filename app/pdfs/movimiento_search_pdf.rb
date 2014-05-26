@@ -31,6 +31,7 @@ private
                               movimientos.fecha_movimiento, 
                               movimientos.observacion,
                               movimientos.importe, 
+                              movimientos.es_contrasiento,
                               transacciones.id AS id_transaccion,
                               transacciones.descripcion AS descripcion_transaccion,
                               transacciones.es_debito AS es_debito,
@@ -54,53 +55,58 @@ private
       text "- No se han encontrado movimientos para su consulta -", align: :center
     else
       data = []
-      nromovil = credito = debito = saldo = 0
+      nromovil = @credito = @debito = @saldo = 0
       chofer = ""
       movimientos.each do |m|
-        if m.es_debito.to_bool
-          credito = 0
-          debito = m.importe
-          saldo = saldo - m.importe
-        else
-          credito = m.importe
-          debito = 0
-          saldo = saldo + m.importe
-        end
-        transaccion = m.descripcion_transaccion
-        if not m.observacion.empty?
-          transaccion += " - " + m.observacion
-        end
+        data += build_row(m)
         if nromovil != m.nromovil || chofer != m.nombre_chofer
-          print_details(nromovil, chofer, data) if nromovil > 0 and not chofer.empty?
+          if nromovil > 0 and not chofer.empty?
+            # data.delete_at(data.size-1)
+            print_details(data[0..data.size-2])
+            @saldo = 0
+            data = build_row(m)
+          end
+          print_header_group(m.nromovil, m.nombre_chofer)
           nromovil = m.nromovil
           chofer = m.nombre_chofer
-          saldo = 0
-          data = []
         end
-        data += [[m.updated_at.strftime('%d/%m/%Y %T'),
-                  m.fecha_movimiento.strftime('%d/%m/%Y'),
-                  m.id_transaccion,
-                  transaccion,
-                  number_to_currency(credito),
-                  number_to_currency(debito),
-                  number_to_currency(saldo)]]
       end
-      m = movimientos.last
-      print_details(m.nromovil, m.nombre_chofer, data)
-      # table data, header: true, cell_style: {borders: [], padding: [2,5,2,5]}
+      print_details(data)
     end
   end
 
-  def print_details(nromovil, chofer, data)
-    group = [[ {content: "Móvil:", font_style: :bold},    nromovil,
-               {content: " Chofer:", font_style: :bold},  chofer]]
-    table group do
-      self.header = false
-      column(0..3).align = :left
-      cells.style(borders: [], padding: [2,2,2,2], size: 8)
+  def build_row(movimiento)
+    if movimiento.es_debito.to_bool
+      @credito = 0
+      @debito = movimiento.importe
+      @saldo = @saldo - movimiento.importe
+    else
+      @credito = movimiento.importe
+      @debito = 0
+      @saldo = @saldo + movimiento.importe
     end
-    move_down 5
+    cred = number_to_currency(@credito)
+    deb = number_to_currency(@debito)      
+    if movimiento.es_contrasiento
+      if movimiento.es_debito.to_bool
+        @saldo = @saldo + @debito
+        deb = {content: "(c) #{deb}", font_style: :italic}
+      else
+        @saldo = @saldo - @credito
+        cred = {content: "(c) #{cred}", font_style: :italic}
+      end
+    end
+    sdo = number_to_currency(@saldo)
+    transaccion = movimiento.descripcion_transaccion
+    transaccion += " - " + movimiento.observacion unless movimiento.observacion.empty?
+    [[movimiento.updated_at.strftime('%d/%m/%Y %T'),
+      movimiento.fecha_movimiento.strftime('%d/%m/%Y'),
+      movimiento.id_transaccion,
+      transaccion,
+      cred, deb, sdo]]
+  end
 
+  def print_details(data)
     data = TABLE_HEADER + data
     table data do
       self.header = true
@@ -112,7 +118,17 @@ private
       cells.style(borders: [], padding: [2,2,2,2], size: 8)
       row(0).style(align: :center, borders: [:bottom], border_width: 1, font_style: :bold)
     end
-
     move_down 10
+  end
+
+  def print_header_group(nromovil, chofer)
+    group = [[ {content: "Móvil:", font_style: :bold},    nromovil,
+               {content: " Chofer:", font_style: :bold},  chofer]]
+    table group do
+      self.header = false
+      column(0..3).align = :left
+      cells.style(borders: [], padding: [2,2,2,2], size: 8)
+    end
+    move_down 5    
   end
 end
