@@ -55,12 +55,15 @@ private
   end
 
   def detail_row(movimiento)
+    i = movimiento.ingresos.to_f
+    e = movimiento.egresos.to_f
+    u = i - e
     [[movimiento.nromovil, 
       movimiento.nombre_chofer, 
-      number_to_currency(movimiento.ingresos), 
-      number_to_currency(movimiento.egresos),
-      number_to_currency(movimiento.ingresos - movimiento.egresos),
-      number_to_percentage(((movimiento.ingresos - movimiento.egresos) / movimiento.ingresos) * 100)]]
+      number_to_currency(i), 
+      number_to_currency(e),
+      number_to_currency(u),
+      number_to_percentage((u / i) * 100)]]
   end
 
   def print_details(data)
