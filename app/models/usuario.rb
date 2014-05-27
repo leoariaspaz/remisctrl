@@ -6,11 +6,10 @@ class Usuario < ActiveRecord::Base
 	validates :nombre, presence: true, uniqueness: true
 	validates :password_confirmation, presence: true		
 	validates :password, confirmation: { message: "no coincide con la contraseña ingresada"}
+	validate 	:password_must_be_present
 	
 	attr_accessor :password_confirmation
 	attr_reader 	:password
-	
-	validate :password_must_be_present	
 	
 	# password es un atributo virtual
 	def password=(password)
