@@ -34,17 +34,17 @@ private
                     where(%{  movimientos.fecha_movimiento >= ? AND
                               movimientos.fecha_movimiento <= ? AND
                               moviles.nromovil >= ?             AND
-                              moviles.nromovil <= ? },
+                              moviles.nromovil <= ?             AND
+                              movimientos.es_contrasiento = ? },
                               movimiento_search.fecha_desde, 
                               movimiento_search.fecha_hasta, 
                               movimiento_search.nromovil_desde, 
-                              movimiento_search.nromovil_hasta).
+                              movimiento_search.nromovil_hasta,
+                              false).
                     group( %{ choferes.nombre,
                               moviles.nromovil }).
-                    order(%{  moviles.nromovil ASC })
-    if not movimiento_search.mostrar_contrasientos.to_bool
-      movimientos = movimientos.where(['movimientos.es_contrasiento = ?', false])
-    end
+                    order(%{  moviles.nromovil ASC,
+                              choferes.nombre ASC })
     if movimientos.empty?
       text "- No se han encontrado movimientos para su consulta -", align: :center
     else

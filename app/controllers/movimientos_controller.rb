@@ -62,7 +62,7 @@ class MovimientosController < ApplicationController
     @movimientos_search = MovimientoSearch.new
   end
 
-  # GET /movimientos/consultar_por_criterio
+  # GET /movimientos/consultar_agrupado
   def consultar_agrupado
     search = params.require(:search).permit(:tipo_informe, :fecha_desde, :fecha_hasta, 
                 :nromovil_desde, :nromovil_hasta, :mostrar_contrasientos)
