@@ -1,4 +1,4 @@
-class MovimientoSearchMovilPdf < Prawn::Document
+class MovimientoSearchTransaccionPdf < Prawn::Document
   include PdfReport
   include ApplicationHelper
   include ActionView::Helpers::NumberHelper 
@@ -6,7 +6,7 @@ class MovimientoSearchMovilPdf < Prawn::Document
   TABLE_HEADER = [["Cód. Trx.", "Transacción", "Crédito", "Débito"]]
 
   def initialize(movimiento_search, view)
-    super({page_size: "A4", left_margin: 20, right_margin: 20})
+    super({page_size: "A4", margin: [20, 20, 20, 20]})
     @file_name = "Movimientos - Por #{MovimientoSearch::TipoInforme[movimiento_search.tipo_informe.to_sym].downcase}"
     subtitle =  "Del #{format_date(movimiento_search.fecha_desde)} al #{format_date(movimiento_search.fecha_hasta)} - " + 
                 "Del móvil #{movimiento_search.nromovil_desde} al #{movimiento_search.nromovil_hasta} - " +
@@ -23,17 +23,12 @@ class MovimientoSearchMovilPdf < Prawn::Document
 private
   def body(movimiento_search)
     t = ActiveRecord::Base.connection.quoted_true
-    movimientos = Movimiento.
+    @movim_rel = Movimiento.
                     joins(:transaccion, :cuenta).
                     joins(%{INNER JOIN moviles ON moviles.id = cuentas.movil_id 
-                            INNER JOIN choferes ON choferes.id = cuentas.chofer_id}).                    
-                    select(%{ moviles.nromovil,
-                              choferes.nombre AS nombre_chofer,
-                              transacciones.id AS id_transaccion,
-                              transacciones.descripcion AS descripcion_transaccion,
-                              movimientos.observacion,
-                              SUM(CASE WHEN transacciones.es_debito = #{t} THEN 0 ELSE movimientos.importe END) AS creditos,
-                              SUM(CASE WHEN transacciones.es_debito = #{t} THEN movimientos.importe ELSE 0 END) AS debitos }).
+                            INNER JOIN choferes ON choferes.id = cuentas.chofer_id}).
+                    select(%{ SUM(CASE WHEN transacciones.es_debito = #{t} THEN 0 ELSE movimientos.importe END) AS creditos,
+                              SUM(CASE WHEN transacciones.es_debito = #{t} THEN movimientos.importe ELSE 0 END) AS debitos }).                    
                     where(%{  movimientos.fecha_movimiento >= ? AND
                               movimientos.fecha_movimiento <= ? AND
                               moviles.nromovil >= ?             AND
@@ -43,33 +38,42 @@ private
                               movimiento_search.fecha_hasta,
                               movimiento_search.nromovil_desde,
                               movimiento_search.nromovil_hasta,
-                              false).
+                              false)
+    mov_detalle = @movim_rel.
+                    select(%{ moviles.nromovil,
+                              choferes.id AS id_chofer,
+                              choferes.nombre AS nombre_chofer,
+                              transacciones.id AS id_transaccion,
+                              transacciones.descripcion AS descripcion_transaccion }).
                     group( %{ moviles.nromovil,
+                              choferes.id,
                               choferes.nombre,
                               transacciones.id,
-                              transacciones.descripcion,
-                              movimientos.observacion }).
+                              transacciones.descripcion }).
                     order(%{  moviles.nromovil ASC,
-                              choferes.nombre ASC })
-    if movimientos.empty?
+                              choferes.nombre ASC,
+                              transacciones.id })
+    if mov_detalle.empty?
       text "- No se han encontrado movimientos para su consulta -", align: :center
     else
       data = []
-      nromovil = 0
+      nromovil = chofer_id = 0
       chofer = ""
-      movimientos.each do |m|
+      mov_detalle.each do |m|
         data += detail_row(m)
-        if nromovil != m.nromovil || chofer != m.nombre_chofer
-          if nromovil > 0 and not chofer.empty?
-            print_details(data[0..data.size-2])
+        if nromovil != m.nromovil || chofer_id != m.id_chofer
+          if nromovil > 0 and chofer_id > 0            
+            print_details(data[0..data.size-2], nromovil, chofer_id)
             data = detail_row(m)
           end
           print_header_group(m.nromovil, m.nombre_chofer)
-          nromovil = m.nromovil
-          chofer = m.nombre_chofer
+          nromovil  = m.nromovil
+          chofer_id = m.id_chofer
+          chofer    = m.nombre_chofer
         end
       end
-      print_details(data)
+      print_details(data, nromovil, chofer_id)
+      print_total_gral
     end
   end
 
@@ -77,13 +81,14 @@ private
     cred = number_to_currency(movimiento.creditos)
     deb = number_to_currency(movimiento.debitos)
     transaccion = movimiento.descripcion_transaccion
-    transaccion += " - " + movimiento.observacion unless movimiento.observacion.empty?
-    [[movimiento.id_transaccion,
-      transaccion,
-      cred, deb]]
+    [[movimiento.id_transaccion, transaccion, cred, deb]]
   end
 
-  def print_details(data)
+  def print_details(data, nromovil, chofer_id)
+    totales = @movim_rel.where(%{ moviles.nromovil = ? AND choferes.id = ?}, nromovil, chofer_id).first
+    tot_cred = number_to_currency(totales.creditos)
+    tot_deb = number_to_currency(totales.debitos)
+    data += [["TOTAL", "", tot_cred, tot_deb]]
     data = TABLE_HEADER + data
     table data do
       self.header = true
@@ -93,6 +98,7 @@ private
       column(2..3).align = :right
       cells.style(borders: [], padding: [2,2,2,2], size: 8)
       row(0).style(align: :center, borders: [:bottom], border_width: 1, font_style: :bold)
+      row(data.size-2).style(borders: [:bottom], border_width: 0.5)
     end
     move_down 10
   end
@@ -105,6 +111,26 @@ private
       column(0..3).align = :left
       cells.style(borders: [], padding: [2,2,2,2], size: 8)
     end
-    move_down 5    
+    move_down 5
+  end
+
+  def print_total_gral
+    totales = @movim_rel.first
+    tot_cred = number_to_currency(totales.creditos)
+    tot_deb = number_to_currency(totales.debitos)
+    saldo = number_to_currency(totales.creditos.to_f - totales.debitos.to_f)
+    move_down 30
+    data = [["TOTAL GENERAL", ""], 
+            ["Créditos: ", tot_cred],
+            ["Débitos: ", tot_deb],
+            ["Saldo a pagar: ", saldo]]
+    table data do
+      self.header = false
+      self.column_widths = [80, 60]
+      self.position = :center
+      cells.style(borders: [], padding: [2,2,2,2], size: 8)
+      column(0).style(align: :left, font_style: :bold)
+      row(0).style(borders: [:bottom], border_width: 1)
+    end
   end
 end
