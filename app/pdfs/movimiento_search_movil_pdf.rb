@@ -1,4 +1,4 @@
-class MovimientoSearchPdf < Prawn::Document
+class MovimientoSearchMovilPdf < Prawn::Document
   include PdfReport
   include ApplicationHelper
   include ActionView::Helpers::NumberHelper 
@@ -6,7 +6,7 @@ class MovimientoSearchPdf < Prawn::Document
   TABLE_HEADER = [["Fec. real", "Fec. Mov.", "Cód. Trx.", "Transacción", "Crédito", "Débito", "Saldo"]]
 
   def initialize(movimiento_search, view)
-    super({size: "A4"})
+    super({page_size: "A4", left_margin: 20, right_margin: 20})
     @file_name = "Movimientos - Por #{MovimientoSearch::TipoInforme[movimiento_search.tipo_informe.to_sym].downcase}"
     subtitle =  "Del #{format_date(movimiento_search.fecha_desde)} al #{format_date(movimiento_search.fecha_hasta)} - " + 
                 "Del móvil #{movimiento_search.nromovil_desde} al #{movimiento_search.nromovil_hasta} - " +
@@ -48,7 +48,7 @@ private
                     order(%{  moviles.nromovil ASC,
                               movimientos.fecha_movimiento ASC, 
                               movimientos.updated_at ASC })
-    if not movimiento_search.mostrar_contrasientos
+    if not movimiento_search.mostrar_contrasientos.to_bool
       movimientos = movimientos.where(['movimientos.es_contrasiento = ?', false])
     end
     if movimientos.empty?
@@ -58,13 +58,12 @@ private
       nromovil = @credito = @debito = @saldo = 0
       chofer = ""
       movimientos.each do |m|
-        data += build_row(m)
+        data += detail_row(m)
         if nromovil != m.nromovil || chofer != m.nombre_chofer
           if nromovil > 0 and not chofer.empty?
-            # data.delete_at(data.size-1)
             print_details(data[0..data.size-2])
             @saldo = 0
-            data = build_row(m)
+            data = detail_row(m)
           end
           print_header_group(m.nromovil, m.nombre_chofer)
           nromovil = m.nromovil
@@ -75,7 +74,7 @@ private
     end
   end
 
-  def build_row(movimiento)
+  def detail_row(movimiento)
     if movimiento.es_debito.to_bool
       @credito = 0
       @debito = movimiento.importe

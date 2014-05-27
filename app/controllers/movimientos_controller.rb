@@ -68,10 +68,19 @@ class MovimientosController < ApplicationController
                 :nromovil_desde, :nromovil_hasta, :mostrar_contrasientos)
     @movimientos_search = MovimientoSearch.new(search)
     if @movimientos_search.valid?
-      pdf = MovimientoSearchPdf.new(@movimientos_search, view_context)
-      send_data pdf.render, filename: pdf.file_name,
-                            type: "application/pdf",
-                            disposition: "inline"
+      case @movimientos_search.tipo_informe.to_sym
+        when :por_movil
+          pdf = MovimientoSearchMovilPdf.new(@movimientos_search, view_context)
+        when :por_utilidad
+          pdf = MovimientoSearchUtilidadPdf.new(@movimientos_search, view_context)
+        when :por_transaccion
+          pdf = MovimientoSearchTransaccionPdf.new(@movimientos_search, view_context)
+      end
+      if not pdf.nil?
+        send_data pdf.render, filename: pdf.file_name,
+                              type: "application/pdf",
+                              disposition: "inline"
+      end
     else
       render action: 'consultar'
     end
