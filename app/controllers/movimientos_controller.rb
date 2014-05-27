@@ -70,11 +70,11 @@ class MovimientosController < ApplicationController
     if @movimientos_search.valid?
       case @movimientos_search.tipo_informe.to_sym
         when :por_movil
-          pdf = MovimientoSearchMovilPdf.new(@movimientos_search, view_context)
+          pdf = MovimientoMovilPdf.new(@movimientos_search, view_context)
         when :por_utilidad
-          pdf = MovimientoSearchUtilidadPdf.new(@movimientos_search, view_context)
+          pdf = MovimientoUtilidadPdf.new(@movimientos_search, view_context)
         when :por_transaccion
-          pdf = MovimientoSearchTransaccionPdf.new(@movimientos_search, view_context)
+          pdf = MovimientoTransaccionPdf.new(@movimientos_search, view_context)
       end
       if not pdf.nil?
         send_data pdf.render, filename: pdf.file_name,

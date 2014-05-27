@@ -1,4 +1,4 @@
-class MovimientoSearchMovilPdf < Prawn::Document
+class MovimientoMovilPdf < Prawn::Document
   include PdfReport
   include ApplicationHelper
   include ActionView::Helpers::NumberHelper 
