@@ -17,6 +17,11 @@ module Remisctrl
     # config.time_zone = 'Central Time (US & Canada)'
     config.time_zone = 'Buenos Aires'
 
+    # Rails I18n validation deprecation warning - ver http://stackoverflow.com/q/20361428
+    # config.i18n.enforce_available_locales = true
+    # Actualmente sólo funciona con false - ver https://github.com/svenfuchs/i18n/issues/224
+    I18n.config.enforce_available_locales = false
+
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de

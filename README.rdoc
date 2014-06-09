@@ -53,3 +53,8 @@ Please feel free to use a different markup language if you do not plan to run
 	-Instalar MySql
 	- Crear base de datos de producción y usuario de conexión
 	- Configurar en la aplicación config\database.yml
+
+	- Ejecutar en consola:
+		- bundle exec rake db:migrate RAILS_ENV="production"
+		- bundle exec rake db:seed RAILS_ENV="production"
+		- bundle exec rake assets:precompile
