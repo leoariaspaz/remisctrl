@@ -10,7 +10,8 @@ gem 'sqlite3', group: [:development, :test]
 gem 'sass-rails', '~> 4.0.0'
 
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+# gem 'uglifier', '>= 1.3.0'
+gem 'closure-compiler'
 
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
@@ -48,7 +49,7 @@ gem 'carrierwave'
 gem 'prawn_rails'
 gem 'will_paginate', '~> 3.0'
 gem 'thin'
-# group :production do
-# 	# gem 'tiny_tds'
-# 	# gem 'activerecord-sqlserver-adapter', '~> 4.0.0'
-# end
+group :production do
+	gem 'tiny_tds'
+	gem 'activerecord-sqlserver-adapter', '~> 4.0.0'
+end

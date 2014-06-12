@@ -19,11 +19,11 @@ test:
   timeout: 5000
 
 production:
-  adapter: mysql
-  encoding: utf8
-  reconnect: false
-  database: remisctrl_production
-  pool: 5
-  username: remisctrlusr
-  password: remisctrlpwd
-  host: localhost
+  adapter: sqlserver
+  mode: dblib
+  dataserver: 'VARIOS\SQL2008'   # Name from freetds.conf, host or instance 'localhost\SQLEXPRESS'
+  port: 1433              # Used if host present. Default is 1433.
+  database: RemisCtrlTest
+  username: TestUser
+  password: abcdefg
+  timeout: 5000
