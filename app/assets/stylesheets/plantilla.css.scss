@@ -304,12 +304,12 @@ a.btnaction:hover, .actions input:hover {
 }
 
 .btnyes {
-		background: url("/assets/tick.png") no-repeat scroll 5px center #F5F5F5 !important;
+		background: image-url("tick.png") no-repeat scroll 5px center #F5F5F5 !important;
 		padding-left: 25px !important;	
 }
 
 .btnno {
-		background: url("/assets/16x16_stop.png") no-repeat scroll 5px center #F5F5F5 !important;
+		background: image-url("16x16_stop.png") no-repeat scroll 5px center #F5F5F5 !important;
 		padding-left: 25px !important;	
 }
 
@@ -319,12 +319,12 @@ a.btnaction:hover, .actions input:hover {
 		padding-bottom: 5px !important;
 	}
 	.btnsave {
-			background: url("/assets/disk.png") no-repeat scroll 5px center #F5F5F5 !important;
+			background: image-url("disk.png") no-repeat scroll 5px center #F5F5F5 !important;
 			padding-left: 25px !important;		
 	}
 
 	.btnsearch {
-			background: url("/assets/magnifier.png") no-repeat scroll 5px center #F5F5F5 !important;
+			background: image-url("magnifier.png") no-repeat scroll 5px center #F5F5F5 !important;
 			padding-left: 20px !important;
 	}
 }
@@ -343,11 +343,11 @@ a.action {
 	display: block;
 	padding: 10px 0 10px 10px;
 	.btnadd {
-			background: url("/assets/add.png") no-repeat scroll 5px center #F5F5F5 !important;
+			background: image-url("add.png") no-repeat scroll 5px center #F5F5F5 !important;
 			padding-left: 25px !important;
 	}
 	.btnsearch {
-			background: url("/assets/magnifier.png") no-repeat scroll 5px center #F5F5F5 !important;
+			background: image-url("magnifier.png") no-repeat scroll 5px center #F5F5F5 !important;
 			padding-left: 25px !important;
 	}
 }
