@@ -30,12 +30,6 @@ Please feel free to use a different markup language if you do not plan to run
 
 * DEPLOYMENT INSTRUCTIONS
 - En DESARROLLO (ambiente Ubuntu 14.04):
-	# - Instalar freetds
-	# 	- Descargar freetds desde ftp://ftp.freetds.org/pub/freetds/ 
-	# 	- Descomprimir a una carpeta el archivo descargado
-	# 	- Ejecutar en consola:
-	# 	    ./configure
-  #   		make; make install; make clean
   - Ejecutar en consola:
 	  	bundle update
 	  	bundle pack
@@ -49,10 +43,6 @@ Please feel free to use a different markup language if you do not plan to run
 		- Instalar .net framework 3.5 SP1
 		- Instalar SQL Server 2008
 		- Instalar SQL Server 2008 Management Console
-	o bien, 
-	-Instalar MySql
-	- Crear base de datos de producción y usuario de conexión
-	- Configurar en la aplicación config\database.yml
 
 	- Ejecutar en consola:
 		- set RAILS_ENV=production
