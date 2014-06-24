@@ -25,9 +25,9 @@
 			<%= image_tag image_path("taxi.png"), alt: "logo" %>
 		</div>
 		<ul id="mainlinks">
-			<li><%= link_to_moviles_index %></li>
-			<li><%= link_to_index model_name: "propietario" %></li>
-			<li><%= link_to_index model_name: "chofer" %></li>
+			<li><%= link_to_index model_name: "moviles", title: "Móviles", parent_of: "documentos" %></li>
+			<li><%= link_to_index model_name: "propietario", parent_of: "documentos" %></li>
+			<li><%= link_to_index model_name: "chofer", parent_of: "documentos" %></li>
 			<li><%= link_to_index model_name: "cuenta" %></li>
 			<li><%= link_to_index model_name: "movimiento" %></li>
 			<li><%= link_to_config_index %></li>

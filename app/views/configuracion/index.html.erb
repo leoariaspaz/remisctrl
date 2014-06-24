@@ -3,9 +3,9 @@
 <%= render_notice notice %>
 
 <ul id="opciones">
-	<li>
+	<%# li>
 		<%= link_to_if is_admin, "Configuración general", edit_configuracion_path(Configuracion.current.id) %>
-	</li>
+	<%# /li %>
 	<li>
 		<%= link_to "Configurar datos de relleno", rellenos_path %>
 	</li>

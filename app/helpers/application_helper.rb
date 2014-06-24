@@ -63,17 +63,39 @@ module ApplicationHelper
 	end
 	
 	def link_to_index(options)
+		#c = ["propietarios"]
+		#if params[:controller] == 'documentos' and params.has_key?(:propietario_id)
+		#	c << "documentos"
+		#end
+		#link_to_index model_name: "propietario", url: propietarios_path, controller:	c
+
+
+
 		model_name   = options[:model_name]	|| ""
 		title        = options[:title] || model_name.titleize.pluralize
 		controller   = options[:controller] || model_name.pluralize
 		url          = options[:url] || url_for(controller: controller, action: "index")
 		html_options = options[:html_options] || {}
+		parent_of 	 = options[:parent_of] || {}
+		model_as_key = "#{model_name}_id".to_sym
 		if controller.kind_of?(String)
-			html_options.reverse_merge!({class: 'current'})	if request[:controller] == controller
-		elsif controller.kind_of?(Array)
-			html_options.reverse_merge!({class: 'current'}) if controller.include? request[:controller]
+			all_controllers = [controller]
+		else
+			all_controllers = controller
 		end
-		
+		if parent_of.kind_of?(String)
+			parent_of = [parent_of]
+		end
+		if (parent_of.include?(request[:controller]) and params.has_key?(model_as_key)) or
+					all_controllers.include?(request[:controller])
+			html_options.reverse_merge!({class: 'current'})
+		end
+
+		# if controller.kind_of?(String)
+		# 	html_options.reverse_merge!({class: 'current'})	if request[:controller] == controller
+		# elsif controller.kind_of?(Array)
+		# 	html_options.reverse_merge!({class: 'current'}) if controller.include? request[:controller]
+		# end
 		link_to title, url, html_options
 	end
 	
