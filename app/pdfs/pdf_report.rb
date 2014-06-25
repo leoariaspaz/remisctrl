@@ -1,11 +1,13 @@
 # basado en 
 # https://github.com/ryanb/railscasts-episodes/blob/master/episode-153/revised/store-after/app/pdfs/order_pdf.rb
 module PdfReport
+  include ActionView::Helpers::AssetUrlHelper
+
   def header(title, subtitle = nil)
+    img_path = "#{Rails.root}/app/assets/images/taxi.png"
     time = I18n.l Time.now, format: "%d/%m/%Y %H:%M"
     data = [[
-              [[{image: "#{Rails.root}/app/assets/images/taxi.png", image_width: 32, borders: [], 
-                    padding: 0, position: :center}],
+              [[{image: img_path, image_width: 32, borders: [], padding: 0, position: :center}],
               [{content: "Remis Ctrl", size: 7, borders: [], padding: 0, align: :center, font_style: :bold}]],
               {content: title, size: 24, align: :center},
               {content: time, size: 7, align: :center, font_style: :italic}
