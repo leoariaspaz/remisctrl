@@ -1,15 +1,19 @@
 <%= set_title "Configuración de rellenos" %>
 
 <%= form_tag(url_for(action: :index), method: :get) do -%>
-	<%= select_options_tag(:id, TipoRelleno.all_for_select, value: @value,
-					prompt: t('helpers.select.prompt'), onchange: "this.form.submit();") %>
+  <div class="field">
+    <%= label_tag "Configurar:" %>
+  	<%= select_options_tag(:id, TipoRelleno.all_for_select, value: @value,
+  					prompt: t('helpers.select.prompt'), onchange: "this.form.submit();") %>
+  </div>
 <% end -%>
+
+<div class="btnbar">
+  <%= link_to_new 'Nuevo valor', url_for(action: :new, tipo_relleno_id: @value) unless not @value.present? %>
+</div>
 
 <%= render_notice notice %>
 
-<p>
-	<%= link_to_new 'Nuevo valor', url_for(action: :new, tipo_relleno_id: @value) unless not @value.present? %>
-</p>
 <% if @rellenos.present? and @rellenos.any? %>
 
 <table class="data">
@@ -26,13 +30,13 @@
 
   <tbody>
     <% @rellenos.each do |relleno| %>
-      <tr>
-        <td><%= relleno.codigo %></td>
+      <tr class="<%= cycle("alt", "") %>">
+        <td class="ar"><%= relleno.codigo %></td>
         <td><%= relleno.descripcion %></td>
         <td><%= relleno.sintetico %></td>
         <td class="ac"><%= check_box_tag(:habilitado, relleno.habilitado, relleno.habilitado, :disabled => true ) %></td>
-        <td class="action"><%= link_to 'Editar', edit_relleno_path(relleno) %></td>
-        <td class="action"><%= link_to 'Eliminar', relleno, method: :delete, data: { confirm: t('helpers.destroy.confirm') } %></td>
+        <td class="action"><%= link_to_edit edit_relleno_path(relleno) %></td>
+        <td class="action"><%= link_to_delete relleno %></td>
       </tr>
     <% end %>
   </tbody>

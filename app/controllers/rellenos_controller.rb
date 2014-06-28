@@ -2,7 +2,6 @@ class RellenosController < ApplicationController
   before_action :set_relleno_and_index_url, only: [:edit, :update, :destroy]
 
   # GET /rellenos
-  # GET /rellenos.json
   def index
     @rellenos = nil
     @value = nil
@@ -26,43 +25,35 @@ class RellenosController < ApplicationController
   end
 
   # POST /rellenos
-  # POST /rellenos.json
   def create
     @relleno = Relleno.new(relleno_params)
 
     respond_to do |format|
       if @relleno.save
       	set_index_url
-        format.html { redirect_to @index_url, notice: t('scaffold.save_msg', entity: @relleno.tipo_relleno.descripcion.downcase) }
-        format.json { render action: 'index', status: :created, location: @relleno }
+        format.html { redirect_to @index_url, notice: t('scaffold.save_msg', entity: @relleno.tipo_relleno.descripcion.downcase.camelize) }
       else
         format.html { render action: 'new' }
-        format.json { render json: @relleno.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # PATCH/PUT /rellenos/1
-  # PATCH/PUT /rellenos/1.json
   def update
     respond_to do |format|
       if @relleno.update(relleno_params)      	
-        format.html { redirect_to @index_url, notice: t('scaffold.update_msg', entity: "de " + @relleno.tipo_relleno.descripcion.downcase) }
-        format.json { head :no_content }
+        format.html { redirect_to @index_url, notice: t('scaffold.update_msg', entity: "de " + @relleno.tipo_relleno.descripcion.downcase.camelize) }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @relleno.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # DELETE /rellenos/1
-  # DELETE /rellenos/1.json
   def destroy
     @relleno.destroy
     respond_to do |format|
       format.html { redirect_to @index_url }
-      format.json { head :no_content }
     end
   end
 
@@ -70,7 +61,8 @@ class RellenosController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_relleno_and_index_url
       @relleno = Relleno.find(params[:id])
-      set_index_url      
+      set_index_url
+      logger.debug "@relleno = #{@relleno}, @index_url = #{@index_url}"
     end
     
     def set_index_url
