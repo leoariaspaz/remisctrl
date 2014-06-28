@@ -51,9 +51,14 @@ class RellenosController < ApplicationController
 
   # DELETE /rellenos/1
   def destroy
-    @relleno.destroy
+    n = 'El registro se eliminó correctamente'
+    begin
+      @relleno.destroy 
+    rescue ActiveRecord::DeleteRestrictionError => e
+      n = "No se puede eliminar el registro: hay registros relacionados"
+    end 
     respond_to do |format|
-      format.html { redirect_to @index_url }
+      format.html { redirect_to @index_url, notice: n }
     end
   end
 
