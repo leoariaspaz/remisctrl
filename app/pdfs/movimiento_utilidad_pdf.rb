@@ -3,7 +3,7 @@ class MovimientoUtilidadPdf < Prawn::Document
   include ApplicationHelper
   include ActionView::Helpers::NumberHelper 
 
-  TABLE_HEADER = [["Móvil", "Chofer", "Ingresos", "Egresos", "Utilidad", "Utilidad(%)"]]
+  TABLE_HEADER = [["Cuenta", "Móvil", "Chofer", "Ingresos", "Egresos", "Utilidad", "Utilidad(%)"]]
 
   def initialize(movimiento_search, view)
     super({page_size: "A4", left_margin: 20, right_margin: 20})
@@ -27,7 +27,8 @@ private
                     joins(:transaccion, :cuenta).
                     joins(%{INNER JOIN moviles ON moviles.id = cuentas.movil_id 
                             INNER JOIN choferes ON choferes.id = cuentas.chofer_id}).                    
-                    select(%{ choferes.nombre AS nombre_chofer,
+                    select(%{ cuentas.id AS nrocuenta,
+                              choferes.nombre AS nombre_chofer,
                               moviles.nromovil,
                               SUM(CASE WHEN transacciones.es_debito = #{t} THEN 0 ELSE movimientos.importe END) AS ingresos,
                               SUM(CASE WHEN transacciones.es_debito = #{t} THEN movimientos.importe ELSE 0 END) AS egresos }).
@@ -41,9 +42,11 @@ private
                               movimiento_search.nromovil_desde, 
                               movimiento_search.nromovil_hasta,
                               false).
-                    group( %{ choferes.nombre,
+                    group( %{ cuentas.id,
+                              choferes.nombre,
                               moviles.nromovil }).
-                    order(%{  moviles.nromovil ASC,
+                    order(%{  cuentas.id ASC,
+                              moviles.nromovil ASC,
                               choferes.nombre ASC })
     if movimientos.empty?
       text "- No se han encontrado movimientos para su consulta -", align: :center
@@ -58,7 +61,8 @@ private
     i = movimiento.ingresos.to_f
     e = movimiento.egresos.to_f
     u = i - e
-    [[movimiento.nromovil, 
+    [[format_cuenta(movimiento.nrocuenta),
+      movimiento.nromovil, 
       movimiento.nombre_chofer, 
       number_to_currency(i), 
       number_to_currency(e),
@@ -72,9 +76,9 @@ private
       self.header = true
       self.column_widths = [50, 100, 70, 70, 70, 50]
       self.position = :center
-      column(0).align = :center
-      column(1).align = :left
-      column(2..5).align = :right
+      column(0..1).align = :center
+      column(2).align = :left
+      column(3..6).align = :right
       cells.style(borders: [], padding: [2,2,2,2], size: 8)
       row(0).style(align: :center, borders: [:bottom], border_width: 1, font_style: :bold)
     end

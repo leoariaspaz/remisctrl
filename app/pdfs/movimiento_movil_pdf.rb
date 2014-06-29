@@ -32,6 +32,7 @@ private
                               movimientos.observacion,
                               movimientos.importe, 
                               movimientos.es_contrasiento,
+                              cuentas.id AS nrocuenta,
                               transacciones.id AS id_transaccion,
                               transacciones.descripcion AS descripcion_transaccion,
                               transacciones.es_debito AS es_debito,
@@ -55,19 +56,17 @@ private
       text "- No se han encontrado movimientos para su consulta -", align: :center
     else
       data = []
-      nromovil = @credito = @debito = @saldo = 0
-      chofer = ""
+      nrocuenta = @credito = @debito = @saldo = 0
       movimientos.each do |m|
         data += detail_row(m)
-        if nromovil != m.nromovil || chofer != m.nombre_chofer
-          if nromovil > 0 and not chofer.empty?
+        if nrocuenta != m.nrocuenta
+          if nrocuenta > 0
             print_details(data[0..data.size-2])
             @saldo = 0
             data = detail_row(m)
           end
-          print_header_group(m.nromovil, m.nombre_chofer)
-          nromovil = m.nromovil
-          chofer = m.nombre_chofer
+          print_header_group(m.nrocuenta, m.nromovil, m.nombre_chofer)
+          nrocuenta = m.nrocuenta
         end
       end
       print_details(data)
@@ -120,8 +119,9 @@ private
     move_down 10
   end
 
-  def print_header_group(nromovil, chofer)
-    group = [[ {content: "Móvil:", font_style: :bold},    nromovil,
+  def print_header_group(nrocuenta, nromovil, chofer)
+    group = [[ {content: "Cuenta: ", font_style: :bold}, (format_cuenta(nrocuenta)),
+               {content: "Móvil:", font_style: :bold},    nromovil,
                {content: " Chofer:", font_style: :bold},  chofer]]
     table group do
       self.header = false

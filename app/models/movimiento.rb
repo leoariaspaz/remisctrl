@@ -1,4 +1,6 @@
 class Movimiento < ActiveRecord::Base
+  include ApplicationHelper
+
   before_create :set_fecha_proceso
   before_update :set_fecha_proceso
 
@@ -34,7 +36,7 @@ class Movimiento < ActiveRecord::Base
   end
 
   def nro_cuenta
-    "%07d" % cuenta_id
+    format_cuenta(cuenta_id)
   end
 
 protected

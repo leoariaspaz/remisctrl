@@ -238,6 +238,7 @@ es-AR:
         fecha_movimiento: Fecha
       cuenta:
         movil: Móvil
+        descripcion: Descripción
     errors:
       <<: *errors
   will_paginate:

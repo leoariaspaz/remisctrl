@@ -13,6 +13,7 @@
       <th>Chofer</th>
       <th>Movil</th>
       <th>Estado</th>
+      <th>Descripción</th>
       <th>Saldo anterior</th>
       <th></th>
       <th></th>
@@ -26,6 +27,7 @@
         <td><%= cuenta.nombre_chofer %></td>
         <td class="ar"><%= cuenta.nromovil %></td>
         <td><%= cuenta.estado %></td>
+        <td><%= cuenta.descripcion %></td>
         <td class="ar"><%= number_to_currency cuenta.saldo_anterior %></td>
         <td class="action"><%= link_to_edit edit_cuenta_path(cuenta) %></td>
         <td class="action"><%= link_to_delete cuenta, 'dar de baja', 

@@ -40,12 +40,14 @@ private
                               movimiento_search.nromovil_hasta,
                               false)
     mov_detalle = @movim_rel.
-                    select(%{ moviles.nromovil,
+                    select(%{ cuentas.id AS nrocuenta,
+                              moviles.nromovil,
                               choferes.id AS id_chofer,
                               choferes.nombre AS nombre_chofer,
                               transacciones.id AS id_transaccion,
                               transacciones.descripcion AS descripcion_transaccion }).
-                    group( %{ moviles.nromovil,
+                    group( %{ cuentas.id,
+                              moviles.nromovil,
                               choferes.id,
                               choferes.nombre,
                               transacciones.id,
@@ -59,17 +61,21 @@ private
       data = []
       nromovil = chofer_id = 0
       chofer = ""
+      nrocuenta = 0
       mov_detalle.each do |m|
         data += detail_row(m)
-        if nromovil != m.nromovil || chofer_id != m.id_chofer
-          if nromovil > 0 and chofer_id > 0            
+        # if nromovil != m.nromovil || chofer_id != m.id_chofer
+        if nrocuenta != m.nrocuenta
+          # if nromovil > 0 and chofer_id > 0
+          if nrocuenta > 0            
             print_details(data[0..data.size-2], nromovil, chofer_id)
             data = detail_row(m)
           end
-          print_header_group(m.nromovil, m.nombre_chofer)
+          print_header_group(m.nrocuenta, m.nromovil, m.nombre_chofer)
           nromovil  = m.nromovil
           chofer_id = m.id_chofer
           chofer    = m.nombre_chofer
+          nrocuenta = m.nrocuenta
         end
       end
       print_details(data, nromovil, chofer_id)
@@ -103,8 +109,9 @@ private
     move_down 10
   end
 
-  def print_header_group(nromovil, chofer)
-    group = [[ {content: "Móvil:", font_style: :bold},    nromovil,
+  def print_header_group(nrocuenta, nromovil, chofer)
+    group = [[ {content: "Cuenta:", font_style: :bold},   format_cuenta(nrocuenta),
+               {content: "Móvil:", font_style: :bold},    nromovil,
                {content: " Chofer:", font_style: :bold},  chofer]]
     table group do
       self.header = false

@@ -122,4 +122,8 @@ module ApplicationHelper
 		will_paginate logs_estado, page_links: false, params: { controller: 'logs_estado', action: 'index',
 				model_name: model_name }
 	end
+
+	def format_cuenta(cuenta)
+		"%07d" % cuenta
+	end
 end

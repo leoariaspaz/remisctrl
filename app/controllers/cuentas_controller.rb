@@ -50,7 +50,7 @@ class CuentasController < ApplicationController
     e = EstadoCuenta.all.where(codigo: 3).first
     begin
       @cuenta.update(estado_id: e.id)
-      flash[:notice] = "La cuenta #{cuenta.id} se dio de baja correctamente"
+      flash[:notice] = "La cuenta #{@cuenta.id} se dio de baja correctamente"
     rescue Exception => ex
       flash[:notice] = "Error: #{ex.message}"
     end
@@ -90,6 +90,6 @@ class CuentasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cuenta_params
-      params.require(:cuenta).permit(:chofer_id, :movil_id, :saldo_anterior, :agencia_id)
+      params.require(:cuenta).permit(:chofer_id, :movil_id, :saldo_anterior, :agencia_id, :descripcion)
     end
 end

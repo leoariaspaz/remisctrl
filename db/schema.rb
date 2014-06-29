@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140522163546) do
+ActiveRecord::Schema.define(version: 20140628205720) do
 
   create_table "choferes", force: true do |t|
     t.string   "nombre"
@@ -20,10 +20,8 @@ ActiveRecord::Schema.define(version: 20140522163546) do
     t.date     "fechaestado"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "credencial",  precision: 18, scale: 0
-    t.decimal  "decimal",     precision: 18, scale: 0
+    t.decimal  "credencial",  precision: 0, scale: 18
     t.date     "vtocarnet"
-    t.date     "date"
     t.string   "direccion"
     t.string   "telefono"
     t.string   "celular"
@@ -42,6 +40,7 @@ ActiveRecord::Schema.define(version: 20140522163546) do
     t.decimal  "saldo_anterior", precision: 18, scale: 2, default: 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "descripcion"
   end
 
   add_index "cuentas", ["chofer_id"], name: "index_cuentas_on_chofer_id"
@@ -114,7 +113,6 @@ ActiveRecord::Schema.define(version: 20140522163546) do
     t.integer  "cuenta_id"
     t.boolean  "es_contrasiento",                             default: false
     t.datetime "fecha_contrasiento"
-    t.datetime "datetime"
   end
 
   add_index "movimientos", ["cuenta_id"], name: "index_movimientos_on_cuenta_id"
@@ -158,6 +156,13 @@ ActiveRecord::Schema.define(version: 20140522163546) do
   end
 
   add_index "roles_usuarios", ["rol_id", "usuario_id"], name: "index_roles_usuarios_on_rol_id_and_usuario_id", unique: true
+
+  create_table "tipos_imagenes", force: true do |t|
+    t.string   "descripcion"
+    t.boolean  "habilitado",  default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "tipos_relleno", force: true do |t|
     t.string   "descripcion"
