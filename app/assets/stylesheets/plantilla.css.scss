@@ -350,6 +350,10 @@ a.action {
 			background: image-url("magnifier.png") no-repeat scroll 5px center #F5F5F5 !important;
 			padding-left: 25px !important;
 	}
+	.btnprint {
+			background: image-url("printer.png") no-repeat scroll 5px center #F5F5F5 !important;
+			padding-left: 25px !important;		
+	}
 }
 
 /* LISTAS DE IMÀGENES
@@ -357,6 +361,7 @@ a.action {
 #imglist {
 	border-bottom: 1px dotted #555555;
 	clear: both;
+	margin-bottom: 20px;
 	h2 {
     border-bottom: 1px dotted #555555;
     border-top: 1px dotted;

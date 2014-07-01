@@ -25,11 +25,12 @@ Remisctrl::Application.routes.draw do
   patch 'usuarios/:id/reset_password' => 'usuarios#reset_password'
 
   resources :moviles do
-	  resources :documentos
     member do
       get 'print'
+      get 'documentos' => 'moviles#print_documentos'
       get 'getchoferbyagencia/:agencia_id' => 'moviles#getchoferbyagencia'
     end
+	  resources :documentos
   end
 
   resources :propietarios do

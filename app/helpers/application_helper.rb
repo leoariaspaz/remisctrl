@@ -59,7 +59,7 @@ module ApplicationHelper
 	end
 	
 	def link_to_new(text, path)
-		link_to text, path, class: 'btnaction btnadd'
+		link_to_action(text, path, {class: 'btnadd'})
 	end
 	
 	def link_to_index(options)
@@ -111,11 +111,15 @@ module ApplicationHelper
     end	
 	end
 
-	def link_to_print(url_for_options = {}, img_options = {})
+	def link_to_print(url_for_options = {}, img_options = {}, text = nil)
 		url_for_options.reverse_merge!({action: "print", format: "pdf"})
-		link_to url_for(url_for_options) do
-    	image_tag "printer.png", img_options
-    end
+		if text.nil?			
+			link_to url_for(url_for_options) do
+	    	image_tag "printer.png", img_options
+	    end
+	  else
+	  	link_to_action(text, url_for(url_for_options), {class: 'btnprint'})
+		end
 	end
 
 	def logs_estado_pagination(logs_estado, model_name)

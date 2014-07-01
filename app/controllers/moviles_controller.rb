@@ -1,5 +1,5 @@
 class MovilesController < ApplicationController
-  before_action :set_movil, only: [:show, :edit, :update, :destroy, :print]
+  before_action :set_movil, only: [:show, :edit, :update, :destroy, :print, :print_documentos]
   before_action :set_selects, only: [:new, :create, :edit, :update]  
 
   # GET /moviles
@@ -48,7 +48,7 @@ class MovilesController < ApplicationController
   end
 
   def show
-    @movil = Movil.all_descriptive.where(id: params.permit(:id)[:id]).first
+    @movil = Movil.all_descriptive.where(id: params[:id]).first
   end
 
   def print
@@ -65,6 +65,17 @@ class MovilesController < ApplicationController
                               disposition: "inline"
       end
     end
+  end
+
+  def print_documentos
+    respond_to do |format|
+      format.pdf do
+        pdf = DocumentoPdf::DocumentListPdf.new(@movil.documentos)
+        send_data pdf.render, filename: "Documentos del móvil #{@movil.nromovil}.pdf",
+                              type: "application/pdf",
+                              disposition: "inline"
+      end
+    end    
   end
 
   def getchoferbyagencia
