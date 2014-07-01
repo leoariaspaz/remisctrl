@@ -47,6 +47,10 @@ class MovilesController < ApplicationController
     end
   end
 
+  def show
+    @movil = Movil.all_descriptive.where(id: params.permit(:id)[:id]).first
+  end
+
   def print
     begin
       params.require(:wa)

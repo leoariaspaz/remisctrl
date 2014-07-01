@@ -61,7 +61,7 @@
   <tbody>
     <% @moviles.each do |movil| %>
       <tr class="<%= cycle("alt", "") %>">
-        <td class="ac"><%= movil.nromovil %></td>
+        <td class="ac"><%= link_to movil.nromovil, movil_path(movil) %></td>
         <td><%= movil.marca %></td>
         <td class="ac"><%= movil.modelo %></td>
         <td class="ac"><%= movil.dominio %></td>

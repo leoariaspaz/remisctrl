@@ -1,0 +1,48 @@
+<%= set_title "Datos del móvil" %>
+
+<%= render 'logs_estado/ajax_paginate' %>
+
+<div id="details">
+	<p>
+		<strong>Número:</strong>
+		<%= @movil.nromovil %>
+	</p>
+
+	<p>
+		<strong>Marca:</strong>
+		<%= @movil.marca %>
+	</p>
+
+	<p>
+		<strong>Modelo:</strong>
+		<%= @movil.modelo %>
+	</p>
+
+	<p>
+		<strong>Dominio:</strong>
+		<%= @movil.dominio %>
+	</p>
+
+	<p>
+		<strong>Estado:</strong>
+		<%= @movil.estado_movil %> desde el <%= format_date @movil.fecha_estado %>
+	</p>
+
+	<p>
+		<strong>Agencia:</strong>
+		<%= @movil.agencia_movil %>
+	</p>
+
+	<p>
+		<strong>Propietario:</strong>
+		<%= @movil.propietario_movil %>
+	</p>
+
+	<p>
+		<strong>Chofer:</strong>
+		<%= @movil.chofer_movil %>
+	</p>
+</div>
+
+<%= render 'logs_estado/list', logs: @movil.logs.paginate(page: 1, per_page: 5), model_name: 'moviles' %>
+<%= render 'documentos/list', documentable: @movil %>

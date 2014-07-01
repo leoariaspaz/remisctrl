@@ -29,7 +29,6 @@ class Movil < ActiveRecord::Base
   attr_accessor :motivo_cambio_estado
 
   def self.all_descriptive
-    # all.joins(:estado).includes(:agencia, :propietario, :chofer).order(:nromovil).select("moviles.*, rellenos.descripcion AS estado_movil")
     all.
       joins(:estado).
       joins(%{  LEFT JOIN rellenos AS agencias ON moviles.agencia_id = agencias.id
@@ -66,6 +65,12 @@ class Movil < ActiveRecord::Base
 
   def self.all_for_validate_inclusion(agencia_id = nil)
     Movil.all_for_select(agencia_id).map{|t| t[1]}
+  end
+
+  def logs
+    logs_estado.joins(:estado).
+      select("logs_estado.*, rellenos.descripcion AS estado_log").
+      order(created_at: :desc)
   end  
 
 protected
