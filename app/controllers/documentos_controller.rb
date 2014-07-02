@@ -1,6 +1,6 @@
 class DocumentosController < ApplicationController
-  before_action :set_documento, only: [:show, :edit, :update, :destroy]
-  before_action :set_selects, only: [:new, :create, :edit, :update]
+  before_action :set_documento, only: [:show, :destroy]
+  before_action :set_selects, only: [:new, :create]
   before_action :load_documentable
 
   # GET /documentos
@@ -43,11 +43,22 @@ class DocumentosController < ApplicationController
     end
   end
 
+  def print
+    respond_to do |format|
+      format.pdf do
+        logger.debug "@documentable.class = #{@documentable.class}"
+        pdf = DocumentoPdf::DocumentListPdf.new(@documentable.documentos)
+        send_data pdf.render, filename: "Documentos del móvil.pdf",
+                              type: "application/pdf",
+                              disposition: "inline"
+      end
+    end    
+  end  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_documento
       @documento = Documento.find(params[:id])
-      @documentable = Movil.find(@documento.documentable_id)
     end
     
     def set_selects

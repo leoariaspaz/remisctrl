@@ -2,8 +2,7 @@
 	<h2>Documentos relacionados</h2>
 	<div class="btnbar">
 	  <%= link_to_new 'Relacionar un nuevo documento', [:new, documentable, :documento] %>
-	  <%= link_to_print({ controller: documentable.class.to_s.pluralize.downcase, action: :print_documentos }, 
-	  				{ alt: "imprimir legajo", title: "imprimir legajo" }, "Imprimir documentos") %>
+	  <%= link_to_print_documentos documentable %>
 	</div>
 	<%= render_notice notice %>
 	<ul>

@@ -26,26 +26,28 @@ Remisctrl::Application.routes.draw do
 
   resources :moviles do
     member do
+      get 'print_documentos', to: 'documentos#print'
       get 'print'
-      get 'documentos' => 'moviles#print_documentos'
       get 'getchoferbyagencia/:agencia_id' => 'moviles#getchoferbyagencia'
     end
-	  resources :documentos
+	  resources :documentos, except: [:index, :edit, :update]
   end
 
   resources :propietarios do
-    resources :documentos
     member do
+      get 'print_documentos', to: 'documentos#print', format: :pdf
       get 'print'
     end
+    resources :documentos, except: [:index, :edit, :update]
   end
   get 'propietarios/detail_select/:id' => 'propietarios#detail_select'
 
   resources :choferes do
-    resources :documentos
     member do
+      get 'print_documentos', to: 'documentos#print', format: :pdf
       get 'print'
     end
+    resources :documentos, except: [:index, :edit, :update]
   end
   get 'choferes/detail_select/:id' => 'choferes#detail_select'
 

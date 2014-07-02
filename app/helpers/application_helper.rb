@@ -112,8 +112,8 @@ module ApplicationHelper
 	end
 
 	def link_to_print(url_for_options = {}, img_options = {}, text = nil)
-		url_for_options.reverse_merge!({action: "print", format: "pdf"})
 		if text.nil?			
+			url_for_options.reverse_merge!({action: "print", format: "pdf"})
 			link_to url_for(url_for_options) do
 	    	image_tag "printer.png", img_options
 	    end
