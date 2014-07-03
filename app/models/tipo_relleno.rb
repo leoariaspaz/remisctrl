@@ -6,6 +6,6 @@ class TipoRelleno < ActiveRecord::Base
 	validates :codigo, numericality: { only_integer: true, greater_than: 0}
 	
 	def self.all_for_select
-		where(codigo: [1,2,6]).map{|t| [t.descripcion, t.id]}
+		where(codigo: [1,6]).map{|t| [t.descripcion, t.id]}
 	end
 end
