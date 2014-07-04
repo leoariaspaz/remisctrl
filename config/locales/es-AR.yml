@@ -218,6 +218,10 @@ es-AR:
       movil:
         nromovil: Nº Móvil
         motivo_cambio_estado: Motivo
+        ultimo_cambio_embrague_km: Km recorridos al momento del cambio
+        fecha_cambio_embrague: Fecha del cambio del embrague
+        ultimo_cambio_correa_dist_km: Km recorridos al momento del cambio
+        fecha_cambio_correa_dist: Fecha del cambio de la correa de distribución
       chofer:
         direccion: Dirección
         motivo_cambio_estado: Motivo

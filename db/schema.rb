@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140628205720) do
+ActiveRecord::Schema.define(version: 20140703012737) do
 
   create_table "choferes", force: true do |t|
     t.string   "nombre"
@@ -95,6 +95,14 @@ ActiveRecord::Schema.define(version: 20140628205720) do
     t.integer  "chofer_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "km_recorridos",                 default: 0
+    t.datetime "km_recorridos_hasta",           default: '2014-07-04 00:55:40'
+    t.integer  "ultimo_cambio_embrague_km",     default: 0
+    t.datetime "fecha_cambio_embrague"
+    t.integer  "ventana_cambio_embrague_km",    default: 0
+    t.integer  "ultimo_cambio_correa_dist_km",  default: 0
+    t.datetime "fecha_cambio_correa_dist"
+    t.integer  "ventana_cambio_correa_dist_km", default: 0
   end
 
   add_index "moviles", ["agencia_id"], name: "index_moviles_on_agencia_id"

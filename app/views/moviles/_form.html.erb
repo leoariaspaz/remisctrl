@@ -73,6 +73,41 @@
     <%= f.select :chofer_id, @choferes, include_blank: "(Ninguno)" %>
     <div id="chofer_detail" class="details" style="display: none;"></div>
   </div>
+  <div class="field">
+    <%= f.label :km_recorridos %><br>
+    <%= f.number_field :km_recorridos %> hasta el 
+    <%= f.date_select :km_recorridos_hasta %>
+  </div>
+  <div class="fieldgroup">
+    <h2 class="title">Cambio de embrague</h2>
+    <div class="field">
+      <%= f.label :ventana_cambio_embrague_km, 'Período de cambio (en km)' %><br>
+      <%= f.number_field :ventana_cambio_embrague_km %>
+    </div>
+    <div class="field">
+      <%= f.label :ultimo_cambio_embrague_km, 'Km recorridos al momento del cambio' %><br>
+      <%= f.number_field :ultimo_cambio_embrague_km %>
+    </div>
+    <div class="field">
+      <%= f.label :fecha_cambio_embrague %><br>
+      <%= f.date_select :fecha_cambio_embrague, prompt: true %>
+    </div>
+  </div>
+  <div class="fieldgroup">
+    <h2 class="title">Cambio de correa de distribución</h2>
+    <div class="field">
+      <%= f.label :ventana_cambio_correa_dist_km, 'Período de cambio (en km)' %><br>
+      <%= f.number_field :ventana_cambio_correa_dist_km %>
+    </div>
+    <div class="field">
+      <%= f.label :ultimo_cambio_correa_dist_km, 'Km recorridos al momento del cambio' %><br>
+      <%= f.number_field :ultimo_cambio_correa_dist_km %>
+    </div>
+    <div class="field">
+      <%= f.label :fecha_cambio_correa_dist %><br>
+      <%= f.date_select :fecha_cambio_correa_dist, prompt: true %>
+    </div>
+  </div>  
   <%= form_actions(moviles_path) %>
 <% end %>
 

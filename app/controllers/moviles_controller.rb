@@ -88,6 +88,8 @@ class MovilesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def movil_params
       params.require(:movil).permit(:nromovil, :marca, :modelo, :dominio, :estado_id, :fecha_estado, 
-        :agencia_id, :propietario_id, :chofer_id, :motivo_cambio_estado)
+        :agencia_id, :propietario_id, :chofer_id, :motivo_cambio_estado, :km_recorridos, 
+        :km_recorridos_hasta, :ultimo_cambio_embrague_km, :fecha_cambio_embrague, :ventana_cambio_embrague_km, 
+        :ultimo_cambio_correa_dist_km, :fecha_cambio_correa_dist, :ventana_cambio_correa_dist_km)
     end
 end

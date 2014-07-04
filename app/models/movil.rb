@@ -1,6 +1,7 @@
 class Movil < ActiveRecord::Base
   before_create :log_estado_inicial
   before_update :log_cambio_estado, if: :estado_id_changed?
+  before_save   :reset_fecha_cambio
 
   belongs_to	:estado, class_name: 'Relleno', foreign_key: 'estado_id'
   belongs_to	:agencia, class_name: 'Relleno', foreign_key: 'agencia_id'
@@ -25,6 +26,10 @@ class Movil < ActiveRecord::Base
   						message: 'no es uno de los propietarios válidos' }, 
   						unless: Proc.new { |m| m.propietario_id.nil? }
   validates :motivo_cambio_estado, presence: true, if: :estado_id_changed?, on: :update
+  validates :fecha_cambio_embrague, presence: true, 
+              unless: Proc.new {|m| m.ultimo_cambio_embrague_km.zero? || m.ultimo_cambio_embrague_km.nil? }
+  validates :fecha_cambio_correa_dist, presence: true, 
+              unless: Proc.new {|m| m.ultimo_cambio_correa_dist_km.zero? || m.ultimo_cambio_correa_dist_km.nil? }
 
   attr_accessor :motivo_cambio_estado
 
@@ -80,5 +85,14 @@ protected
 
   def log_estado_inicial
     logs_estado.build(estado_id: estado_id, motivo: "Estado inicial")
+  end
+
+  def reset_fecha_cambio
+    if @ultimo_cambio_embrague_km.nil? || @ultimo_cambio_embrague_km.zero?
+      self.fecha_cambio_embrague = nil
+    end
+    if @ultimo_cambio_correa_dist_km.nil? || @ultimo_cambio_correa_dist_km.zero?
+      self.fecha_cambio_correa_dist = nil
+    end
   end
 end

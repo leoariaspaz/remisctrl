@@ -94,7 +94,7 @@ class MovimientosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def movimiento_params
-      params.require(:movimiento).permit(:fecha_movimiento, :transaccion_id, :observacion, :importe, :cuenta_id)
+      params.require(:movimiento).permit(:fecha_movimiento, :transaccion_id, :observacion, :importe, :cuenta_id)          
     end
 
     def set_selects

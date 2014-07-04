@@ -150,6 +150,14 @@ h1.title {
 	padding-left: 10px;
 }
 
+h2.title {
+	border-bottom: 1px solid #555555;
+	font-family: $font-stack1;
+	font-size: 2.25em;
+	line-height: 1.5em;
+	padding-left: 10px;	
+}
+
 table.data {
 	border-collapse: collapse;
 	font-family: $font-stack1;
@@ -241,6 +249,9 @@ table.data {
 form {
 	padding: 10px;
 	width: 60%;
+	* {
+		font-family: $font-stack1;	
+	}	
 	label {
 		font-weight: bold;
 		font-size: 1.25em;
@@ -253,19 +264,25 @@ form {
 		margin-top: 10px;
 		padding: 5px;
 	}	
-}
-
-form * {
-	font-family: $font-stack1;	
-}
-
-.field input {
-	font-size: 1.25em;
-	padding: 3px;
-}
-
-.field input[type="text"] {
-	width: 98%;
+	.field {
+		input {
+			font-size: 1.25em;
+			padding: 3px;
+		}
+		input[type="text"] {
+			width: 98%;
+		}
+		input[type="number"] {
+			text-align: right;
+		}
+	}
+	.fieldgroup {
+    border-bottom: 1px solid #555555;
+    margin: 25px 0;
+		.field {
+		    margin: 10px 25px;
+		}
+	}
 }
 
 .field_with_errors {
