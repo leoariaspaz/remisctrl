@@ -69,8 +69,6 @@ module ApplicationHelper
 		#end
 		#link_to_index model_name: "propietario", url: propietarios_path, controller:	c
 
-
-
 		model_name   = options[:model_name]	|| ""
 		title        = options[:title] || model_name.titleize.pluralize
 		controller   = options[:controller] || model_name.pluralize

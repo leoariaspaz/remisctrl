@@ -72,6 +72,10 @@ class MovilesController < ApplicationController
     render text: "#{((movil.nil?)? "ninguno":movil.chofer_id)} id = #{params[:id]} agencia_id = #{params[:agencia_id]}"
   end
 
+  def print_all
+    redirect_to moviles_url
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_movil

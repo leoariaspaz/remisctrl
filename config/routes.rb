@@ -24,13 +24,14 @@ Remisctrl::Application.routes.draw do
   resources :usuarios
   patch 'usuarios/:id/reset_password' => 'usuarios#reset_password'
 
+  get 'moviles/print', to: 'moviles#print_all'
   resources :moviles do
     member do
       get 'print_documentos', to: 'documentos#print'
       get 'print'
       get 'getchoferbyagencia/:agencia_id' => 'moviles#getchoferbyagencia'
     end
-	  resources :documentos, except: [:index, :edit, :update]
+    resources :documentos, except: [:index, :edit, :update]
   end
 
   resources :propietarios do
