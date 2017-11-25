@@ -49,7 +49,7 @@ gem 'carrierwave'
 gem 'prawn_rails'
 gem 'will_paginate', '~> 3.0'
 gem 'thin'
-group :production do
-	gem 'tiny_tds'
-	gem 'activerecord-sqlserver-adapter', '~> 4.0.0'
-end
+# group :production do
+# 	gem 'tiny_tds'
+# 	gem 'activerecord-sqlserver-adapter', '~> 4.0.0'
+# end
